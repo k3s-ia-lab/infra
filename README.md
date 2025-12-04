@@ -4,7 +4,7 @@ When it's running, is possible to "talk" with Ollama using jabber/xmpp client us
 
 home lab bare metal specs:
 - Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-- 16 GB RAM DDR3
+- 16 GB RAM DDR3 (Using about 3GB for k3s)
 - NVIDIA GeForce RTX 3050 8GB (Pcie 4.0 x16)
 - SSD 256GB
 - Pcie 2.0 x16
@@ -76,3 +76,25 @@ ollama:
 - url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434
 - no apikey
 - volume mount /mnt/data/ollama
+
+---
+
+notes...
+
+Don't expose this setup to the internet, it's for home lab use only. There's no security configured, no tls activated.
+
+The openfire image is a custom build with pre-configured settings for easier setup.
+
+There's no ingress controller configured.
+
+---
+
+Wanted services to add in the future:
+- onedev
+- keycloak
+- custom ubuntu container with dev, ops, network tools, ia-console tools.
+- ssh-mcp-server (allow llm to access the custom ubuntu container via ssh)
+- playright test runner container
+- playright mcp server (allow llm to execute the playright test runner)
+- pgsql vector db for embeddings storage
+- pgsql for onedev, n8n, keycloak, openfire and random experiments
