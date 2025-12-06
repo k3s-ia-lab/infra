@@ -104,7 +104,6 @@ openfire (pre-configured):
 
 n8n (needs first setup):
 - url: http://n8n.k3s-ia-lab.lan/
-- ports: 5678 tcp/http
 - volume mount /mnt/data/n8n
 
 ollama:
