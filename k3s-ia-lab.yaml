@@ -86,7 +86,7 @@ spec:
       restartPolicy: Always
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: ollama
   namespace: k3s-ia-lab
@@ -320,7 +320,6 @@ metadata:
   labels:
     app: postgres
 spec:
-  serviceName: "postgres-service"
   replicas: 1
   selector:
     matchLabels:
