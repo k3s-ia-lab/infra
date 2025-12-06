@@ -64,6 +64,10 @@ spec:
       labels:
         app: openfire
     spec:
+      hostAliases:
+        - ip: "192.168.13.13"
+          hostnames:
+            - "xmpp.k3s-ia-lab.lan"
       containers:
         - image: registry.gitlab.com/soapboxrace/openfire:5.0.2
           env:
@@ -217,6 +221,11 @@ spec:
       labels:
         app: n8n
     spec:
+      hostAliases:
+        - ip: "192.168.13.13"
+          hostnames:
+            - "xmpp.k3s-ia-lab.lan"
+            - "xmpp-adm.k3s-ia-lab.lan"
       containers:
         - name: n8n
           image: docker.n8n.io/n8nio/n8n:1.121.3
