@@ -184,7 +184,7 @@ spec:
             - name: OAUTH_CLIENT_ID
               value: "open-webui-client"
             - name: OAUTH_CLIENT_SECRET
-              value: "vt9g0iXt2CFTSbpa3VdGhPvbvyKNKqkq"
+              value: "**********"
             - name: ENABLE_OAUTH_SIGNUP
               value: "true"
             - name: OAUTH_PROVIDER_NAME
@@ -201,6 +201,8 @@ spec:
               value: "false"
             - name: ENABLE_LOGIN_FORM
               value: "false"
+            - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+              value: "true"
           volumeMounts:
             - name: open-webui-storage
               mountPath: /app/backend/data
