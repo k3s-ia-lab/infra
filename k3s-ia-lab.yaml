@@ -263,7 +263,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: k3s-ia-lab-ingress
+  name: k3s-ia-lab
   namespace: k3s-ia-lab
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
@@ -314,7 +314,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: xmpp-ingress
+  name: xmpp
   namespace: k3s-ia-lab
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
