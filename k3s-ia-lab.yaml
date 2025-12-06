@@ -447,6 +447,10 @@ spec:
               value: mysecurepassword
             - name: KC_HTTP_PORT
               value: "8080"
+            - name: KC_BOOTSTRAP_ADMIN_USERNAME
+              value: admin
+            - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+              value: admin
             - name: KC_HOSTNAME
               value: auth.k3s-ia-lab.lan
           ports:

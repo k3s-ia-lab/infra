@@ -121,8 +121,10 @@ postgres:
  - password: mysecurepassword
  - volume mount /mnt/data/postgres
 
-keycloak (needs create keycloak pgsql db, setup with port forwarding):
+keycloak (needs create keycloak pgsql db, initial setup):
 - url: http://auth.k3s-ia-lab.lan/
+- user: admin
+- password: admin
 
 open-webui (needs keycloak, create openwebui pgsql db, needs first setup):
 - url http://open-webui.k3s-ia-lab.lan/
