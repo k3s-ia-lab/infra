@@ -70,10 +70,10 @@ helm install --wait nvidiagpu \
 nvidia/gpu-operator
 ```
 
-create the persistent volume folders:
+create the persistent volume folder:
 ```bash
-sudo mkdir -p /mnt/data/n8n /mnt/data/ollama
-sudo chmod -r 777 /mnt/data
+sudo mkdir -p /mnt/data
+sudo chmod 777 /mnt/data
 ```
 
 add to your /etc/hosts file (server and client) the following entries:
