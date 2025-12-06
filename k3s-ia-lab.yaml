@@ -195,6 +195,12 @@ spec:
               value: "http://open-webui.k3s-ia-lab.lan/oauth/oidc/callback"
             - name: DEFAULT_USER_ROLE
               value: "admin"
+            - name: WEBUI_AUTH_SIGNOUT_REDIRECT_URL
+              value: "http://open-webui.k3s-ia-lab.lan"
+            - name: ENABLE_PASSWORD_AUTH
+              value: "false"
+            - name: ENABLE_LOGIN_FORM
+              value: "false"
           volumeMounts:
             - name: open-webui-storage
               mountPath: /app/backend/data
