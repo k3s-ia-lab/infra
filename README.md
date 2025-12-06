@@ -30,7 +30,7 @@ You can use local models running on Ollama or different LLM cloud services like 
 
 home lab bare metal specs:
 - Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-- 16 GB RAM DDR3 (Using about 3GB for k3s)
+- 16 GB RAM DDR3 (Using about 5GB for k3s)
 - NVIDIA GeForce RTX 3050 8GB (Pcie 4.0 x16)
 - SSD 256GB
 - Pcie 2.0 x16
