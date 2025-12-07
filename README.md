@@ -113,7 +113,7 @@ ollama:
 - no apikey
 - volume mount /mnt/data/ollama
 
-postgres:
+postgres with pgvector extension:
  - dns host: postgres-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
  - ip <your-k3s-ipv4>
  - port: 5432
@@ -141,7 +141,6 @@ The openfire image is a custom build with pre-configured settings for easier set
 ---
 
 Wanted features:
-- pgsql vector db for embeddings storage
 - open-webui with pgvector db backend
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)

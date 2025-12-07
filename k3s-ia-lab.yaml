@@ -384,7 +384,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:18.1
+          image: pgvector/pgvector:0.8.1-pg18-trixie
           env:
             - name: POSTGRES_PASSWORD
               value: "mysecurepassword"
