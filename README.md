@@ -130,7 +130,7 @@ open-webui (needs keycloak, create openwebui pgsql db, needs first setup):
 - url http://open-webui.k3s-ia-lab.lan/
 - volume mount /mnt/data/open-webui
 
-[README.md](onedev/README.md)
+[onedev README.md](onedev/README.md)
 
 ---
 
