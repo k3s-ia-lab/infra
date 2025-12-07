@@ -147,7 +147,7 @@ spec:
     app: ollama
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: open-webui
   namespace: k3s-ia-lab
@@ -215,14 +215,10 @@ spec:
               value: "5432"
             - name: DATABASE_NAME
               value: "openwebui"
-          volumeMounts:
-            - name: open-webui-storage
-              mountPath: /app/backend/data
-      volumes:
-        - name: open-webui-storage
-          hostPath:
-            path: /mnt/data/open-webui
-            type: DirectoryOrCreate
+            - name: PGVECTOR_DB_URL
+              value: "postgresql://postgres:mysecurepassword@postgres-lb.k3s-ia-lab.svc.cluster.local:5432/openwebuipgvector"
+            - name: VECTOR_DB
+              value: pgvector
 ---
 apiVersion: v1
 kind: Service

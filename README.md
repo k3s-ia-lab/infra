@@ -141,7 +141,6 @@ The openfire image is a custom build with pre-configured settings for easier set
 ---
 
 Wanted features:
-- open-webui with pgvector db backend
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
