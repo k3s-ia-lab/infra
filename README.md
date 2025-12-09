@@ -117,7 +117,7 @@ openfire (almost ready) [openfire README.md](openfire/README.md):
 - user: admin
 - password: admin
 
-ollama:
+ollama [ollama README.md](ollama/README.md):
 - url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434 (k8s internal)
 - no apikey
 - volume mount /mnt/data/ollama
