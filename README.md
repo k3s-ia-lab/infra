@@ -12,14 +12,9 @@ You can use any XMPP client (such as Pidgin, Gajim Dino, web-xmpp) to connect to
 
 A n8n workflow acts as a bridge, receiving messages from the user and sending them to the LLM running on Ollama, then returning the response directly in the chat.
 
-Example n8n Workflow
-The repository already includes a versioned n8n workflow that shows how to integrate XMPP events and Ollama API calls, enabling advanced automation (e.g., processing messages, enriching responses, or triggering other actions).
-
-# Example Flow:
-
-[severino-xmpp.json](n8n/severino-xmpp.json)
+The architecture looks like this:
 ```
-   User (XMPP Client) -> Openfire -> Bot -> Ollama -> User (XMPP Client)
+   User (XMPP Client) -> Openfire -> n8n -> Ollama -> n8n -> Openfire -> User (XMPP Client)
 ```
 
 When it's running, is possible to "talk" with Ollama using jabber/xmpp client using n8n workflows.
@@ -139,7 +134,7 @@ keycloak (needs create keycloak pgsql db, initial setup):
 - user: admin
 - password: admin
 
-open-webui (needs keycloak, create openwebui pgsql db, needs first setup):
+open-webui (needs keycloak with k3s-ia-lab realm, user added to realm, create openwebui pgsql db, needs first setup):
 - url http://open-webui.k3s-ia-lab.lan/
 - volume mount /mnt/data/open-webui
 
@@ -156,6 +151,7 @@ The openfire image is a custom build with pre-configured settings for easier set
 ---
 
 Wanted features:
+- migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container

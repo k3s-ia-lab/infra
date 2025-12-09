@@ -102,7 +102,7 @@ spec:
       runtimeClassName: nvidia
       containers:
         - name: ollama-container
-          image: ollama/ollama
+          image: ollama/ollama:0.13.2
           ports:
             - containerPort: 11434
               name: http
@@ -161,7 +161,7 @@ spec:
     spec:
       containers:
         - name: open-webui-container
-          image: ghcr.io/open-webui/open-webui:main
+          image: ghcr.io/open-webui/open-webui:v0.6.41
           ports:
             - containerPort: 8080
               name: http
