@@ -99,6 +99,29 @@ kubectl apply -f k3s-ia-lab.yaml
 <your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan onedev.k3s-ia-lab.lan
 ```
 
+follow the readmes for each service for initial setup:
+
+postgres with pgvector extension: [postgres README.md](postgresql/README.md)
+- dns host: postgres-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
+- ip <your-k3s-ipv4>
+- port: 5432
+- user: postgres
+- password: mysecurepassword
+- volume mount /mnt/data/postgres
+
+openfire (almost ready) [openfire README.md](openfire/README.md):
+- ip: xmpp.k3s-ia-lab.lan
+- url xmpp: http://xmpp.k3s-ia-lab.lan/
+- url adm: http://xmpp-adm.k3s-ia-lab.lan/
+- ports: 5222 tcp/xmpp
+- user: admin
+- password: admin
+
+ollama:
+- url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434 (k8s internal)
+- no apikey
+- volume mount /mnt/data/ollama
+
 rabbitmq:
 - dns: rabbitmq-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
 - port: 5672 tcp/ampq
@@ -107,30 +130,9 @@ rabbitmq:
 - password: password
 - vhost: /
 
-openfire (pre-configured):
-- ip: xmpp.k3s-ia-lab.lan
-- url xmpp: http://xmpp.k3s-ia-lab.lan/
-- url adm: http://xmpp-adm.k3s-ia-lab.lan/
-- ports: 5222 tcp/xmpp
-- user: admin
-- password: admin
-
-n8n (needs first setup):
+n8n: [n8n README.md](n8n/README.md)
 - url: http://n8n.k3s-ia-lab.lan/
 - volume mount /mnt/data/n8n
-
-ollama:
-- url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434 (k8s internal)
-- no apikey
-- volume mount /mnt/data/ollama
-
-postgres with pgvector extension: [postgres README.md](postgresql/README.md)
- - dns host: postgres-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
- - ip <your-k3s-ipv4>
- - port: 5432
- - user: postgres
- - password: mysecurepassword
- - volume mount /mnt/data/postgres
 
 keycloak (needs create keycloak pgsql db, initial setup):
 - url: http://auth.k3s-ia-lab.lan/
