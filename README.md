@@ -91,7 +91,7 @@ kubectl apply -f k3s-ia-lab.yaml
 
 /etc/hosts file entrie to access the ingress routes from your local network:
 ```
-<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan onedev.k3s-ia-lab.lan
+<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan onedev.k3s-ia-lab.lan mcp-inspector.k3s-ia-lab.lan mcp-inspector-proxy.k3s-ia-lab.lan
 ```
 
 follow the readmes for each service for initial setup:
