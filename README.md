@@ -156,6 +156,7 @@ The openfire image is a custom build with pre-configured settings for easier set
 TODO:
 
 - grafana
+- kubeshark
 - split docs per service
 - supabase
 - flowise
