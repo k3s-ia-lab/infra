@@ -41,46 +41,6 @@ K3s namespace k3s-ia-lab deployments/statefulsets:
 - keycloak
 - open-webui
 
-Install k3s
-https://docs.k3s.io/installation
-
-Install NVIDIA GPU Operator on k3s
-https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/25.3.3/getting-started.html
-
-```bash
-helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
-```
-
-```bash
-helm install --wait nvidiagpu \
--n gpu-operator --create-namespace \
---set toolkit.env[0].name=CONTAINERD_CONFIG \
---set toolkit.env[0].value=/var/lib/rancher/k3s/agent/etc/containerd/config.toml \
---set toolkit.env[1].name=CONTAINERD_SOCKET \
---set toolkit.env[1].value=/run/k3s/containerd/containerd.sock \
---set toolkit.env[2].name=CONTAINERD_RUNTIME_CLASS \
---set toolkit.env[2].value=nvidia \
---set toolkit.env[3].name=CONTAINERD_SET_AS_DEFAULT \
---set-string toolkit.env[3].value=true \
-nvidia/gpu-operator
-```
-
-create the persistent volume folder:
-```bash
-sudo mkdir -p /mnt/data/n8n
-sudo chmod -R 777 /mnt/data
-```
-
-edit coredns-custom.yaml with your k3s ipv4 address
-```text
-*          IN A      <your-k3s-ipv4>
-```
-
-deploy the custom coredns config to resolve k3s-ia-lab.lan domains:
-```bash
-kubectl apply -f coredns-custom.yaml
-```
-
 deploy the k3s manifests:
 ```bash
 kubectl apply -f k3s-ia-lab.yaml
@@ -152,7 +112,6 @@ The openfire image is a custom build with pre-configured settings for easier set
 
 TODO:
 
-- grafana
 - kubeshark
 - split docs per service
 - supabase
