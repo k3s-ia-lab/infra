@@ -1,5 +1,11 @@
 This setup needs [keycloak](../keycloak/README.md)
 
+create openwebui databases
+```bash
+kubectl exec -n k3s-ia-lab postgres-0 -- bash -c "echo 'create database openwebui;' | psql -U postgres"
+kubectl exec -n k3s-ia-lab postgres-0 -- bash -c "echo 'create database openwebuipgvector;' | psql -U postgres"
+```
+
 create open-webui
 ```bash
 kubectl apply -f open-webui.yaml
