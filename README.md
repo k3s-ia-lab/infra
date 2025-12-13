@@ -4,10 +4,6 @@ This project contains k3s (lightweight Kubernetes) deployment manifests for my h
 
 This project not only provisions services in the K3s cluster but also demonstrates how they can work together to create a complete experience:
 
-```
-   XMPP Client -> Openfire -> AI via Ollama -> XMPP Client
-```
-
 You can use any XMPP client (such as Pidgin, Gajim Dino, web-xmpp) to connect to the Openfire server.
 
 A n8n workflow acts as a bridge, receiving messages from the user and sending them to the LLM running on Ollama, then returning the response directly in the chat.
@@ -32,23 +28,30 @@ home lab bare metal specs:
 - Ubuntu Server 24.04 LTS
 - k3s v1.33.6+k3s1 (b5847677)
 
+create postgresql with pgvector extension
+```bash
+kubectl apply -f  postgresql/postgresql.yaml
+```
+
+Create n8n databases
+```bash
+kubectl exec -n postgresql postgres-0 -- bash -c "echo 'create database n8n;' | psql -U postgres"
+```
+
 K3s namespace k3s-ia-lab deployments/statefulsets:
 - n8n
 - ollama
 - openfire
 - rabbitmq
-- postgresql with pgvector extension
-- keycloak
-- open-webui
 
-deploy the k3s manifests:
+deploy the k3s-ia-lab manifests:
 ```bash
 kubectl apply -f k3s-ia-lab.yaml
 ```
 
 /etc/hosts file entrie to access the ingress routes from your local network:
 ```
-<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan onedev.k3s-ia-lab.lan mcp-inspector.k3s-ia-lab.lan mcp-inspector-proxy.k3s-ia-lab.lan
+<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan
 ```
 
 follow the readmes for each service for initial setup:
