@@ -3,7 +3,6 @@ kind: Namespace
 metadata:
   name: open-webui
 ---
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -89,3 +88,24 @@ spec:
       protocol: TCP
   selector:
     app: open-webui
+---
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: open-webui
+  namespace: open-webui
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: open-webui.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: open-webui-service
+                port:
+                  number: 8080
