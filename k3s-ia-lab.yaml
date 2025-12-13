@@ -459,6 +459,60 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: zabbix-web
+  namespace: k3s-ia-lab
+  labels:
+    app: zabbix-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zabbix-web
+  template:
+    metadata:
+      labels:
+        app: zabbix-web
+    spec:
+      containers:
+        - name: zabbix-web
+          image: zabbix/zabbix-web-apache-pgsql:ubuntu-7.4.5
+          env:
+            - name: DB_SERVER_HOST
+              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "mysecurepassword"
+            - name: ZBX_SERVER_HOST
+              value: "zbx.k3s-ia-lab.lan:10051"
+            - name: POSTGRES_DB
+              value: "zabbix"
+            - name: PHP_TZ
+              value: "America/Campo_Grande"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zabbix-web-service
+  namespace: k3s-ia-lab
+  labels:
+    app: zabbix-web
+spec:
+  type: ClusterIP
+  selector:
+    app: zabbix-web
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   labels:
     app: grafana
   name: grafana
@@ -478,7 +532,7 @@ spec:
           - 0
       containers:
         - name: grafana
-          image: grafana/grafana:latest
+          image: grafana/grafana:12.4.0-20117635118-ubuntu
           imagePullPolicy: IfNotPresent
           env:
             - name: GF_SERVER_ROOT_URL
@@ -535,6 +589,57 @@ spec:
     app: grafana
   sessionAffinity: None
   type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zabbix-server
+  namespace: k3s-ia-lab
+  labels:
+    app: zabbix-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zabbix-server
+  template:
+    metadata:
+      labels:
+        app: zabbix-server
+    spec:
+      containers:
+        - name: zabbix-server
+          image: zabbix/zabbix-server-pgsql:ubuntu-7.4.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_SERVER_HOST
+              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "mysecurepassword"
+            - name: POSTGRES_DB
+              value: "zabbix"
+          ports:
+            - containerPort: 10051
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zabbix-server-service
+  namespace: k3s-ia-lab
+  labels:
+    app: zabbix-server
+spec:
+  type: LoadBalancer
+  selector:
+    app: zabbix-server
+  ports:
+    - port: 10051
+      targetPort: 10051
+      protocol: TCP
 
 ---
 apiVersion: networking.k8s.io/v1
