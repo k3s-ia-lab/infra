@@ -1,3 +1,11 @@
+openfire [openfire README.md](openfire/README.md):
+- ip: xmpp.k3s-ia-lab.lan
+- url xmpp: http://xmpp.k3s-ia-lab.lan/
+- url adm: http://xmpp-adm.k3s-ia-lab.lan/
+- ports: 5222 tcp/xmpp
+- user: admin
+- password: admin
+
 Needs to create xmpp users, and add friends to test messaging:
 
 using restApi plugin:

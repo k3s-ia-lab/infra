@@ -38,71 +38,24 @@ Create n8n databases
 kubectl exec -n postgresql postgres-0 -- bash -c "echo 'create database n8n;' | psql -U postgres"
 ```
 
-K3s namespace k3s-ia-lab deployments/statefulsets:
-- n8n
-- ollama
-- openfire
-- rabbitmq
-
 deploy the k3s-ia-lab manifests:
 ```bash
 kubectl apply -f k3s-ia-lab.yaml
 ```
 
+K3s namespace k3s-ia-lab deployments/statefulsets:
+
+| service  readme                | http ingress                                                |
+|--------------------------------|-------------------------------------------------------------|
+| [n8n](n8n/README.md)           | http://n8n.k3s-ia-lab.lan/                                  |
+| [ollama](ollama/README.md)     |                                                             |
+| [openfire](openfire/README.md) | http://xmpp.k3s-ia-lab.lan/ http://xmpp-adm.k3s-ia-lab.lan/ |
+| [rabbitmq](rabbitmq/README.md) | http://rabbitmq.k3s-ia-lab.lan                              |
+
 /etc/hosts file entrie to access the ingress routes from your local network:
 ```
 <your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan
 ```
-
-follow the readmes for each service for initial setup:
-
-postgres with pgvector extension: [postgres README.md](postgresql/README.md)
-- dns host: postgres-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
-- ip <your-k3s-ipv4>
-- port: 5432
-- user: postgres
-- password: mysecurepassword
-- volume mount /mnt/data/postgres
-
-openfire (almost ready) [openfire README.md](openfire/README.md):
-- ip: xmpp.k3s-ia-lab.lan
-- url xmpp: http://xmpp.k3s-ia-lab.lan/
-- url adm: http://xmpp-adm.k3s-ia-lab.lan/
-- ports: 5222 tcp/xmpp
-- user: admin
-- password: admin
-
-ollama [ollama README.md](ollama/README.md):
-- url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434 (k8s internal)
-- no apikey
-- volume mount /mnt/data/ollama
-
-rabbitmq:
-- dns: rabbitmq-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
-- port: 5672 tcp/ampq
-- url management: http://rabbitmq.k3s-ia-lab.lan
-- user: user
-- password: password
-- vhost: /
-
-n8n: [n8n README.md](n8n/README.md)
-- url: http://n8n.k3s-ia-lab.lan/
-- volume mount /mnt/data/n8n
-
-keycloak (needs create keycloak pgsql db, initial setup):
-- url: http://auth.k3s-ia-lab.lan/
-- user: admin
-- password: admin
-
-open-webui (needs keycloak with k3s-ia-lab realm, user added to realm, create openwebui pgsql db, needs first setup):
-- url http://open-webui.k3s-ia-lab.lan/
-- volume mount /mnt/data/open-webui
-
-mcp inspector:
-- url http://mcp-inspector.k3s-ia-lab.lan
-
-[onedev README.md](onedev/README.md)
-
 ---
 
 notes...
@@ -116,7 +69,6 @@ The openfire image is a custom build with pre-configured settings for easier set
 TODO:
 
 - kubeshark
-- split docs per service
 - supabase
 - flowise
 - chatwoot

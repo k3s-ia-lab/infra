@@ -1,3 +1,7 @@
+n8n: [n8n README.md](n8n/README.md)
+- url: http://n8n.k3s-ia-lab.lan/
+- volume mount /mnt/data/n8n
+
 # Import initial setup and restart n8n pod:
 ```bash
 kubectl -n k3s-ia-lab exec n8n-0 -- ash -c "git clone https://github.com/k3s-ia-lab/infra.git /tmp/infra"
