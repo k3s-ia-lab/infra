@@ -63,13 +63,13 @@ spec:
             - name: DATABASE_PASSWORD
               value: "mysecurepassword"
             - name: DATABASE_HOST
-              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+              value: "postgres-lb.postgresql.svc.cluster.local"
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_NAME
               value: "openwebui"
             - name: PGVECTOR_DB_URL
-              value: "postgresql://postgres:mysecurepassword@postgres-lb.k3s-ia-lab.svc.cluster.local:5432/openwebuipgvector"
+              value: "postgresql://postgres:mysecurepassword@postgres-lb.postgresql.svc.cluster.local:5432/openwebuipgvector"
             - name: VECTOR_DB
               value: pgvector
 ---
