@@ -1,3 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grafana
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -82,7 +86,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: k3s-ia-lab
+  name: grafana
   namespace: grafana
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
