@@ -7,6 +7,7 @@ https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/25.3.3/getting-star
 
 ```bash
 helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+helm repo update
 ```
 
 install the GPU Operator with containerd settings for k3s:
