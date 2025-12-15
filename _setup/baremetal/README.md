@@ -53,7 +53,7 @@ sudo dkms status
 sudo reboot  
 ```
 
-Install Docker
+Install Docker (used to debug, don't need to install docker for k3s)
 ```bash
 sudo apt-get install curl apt-transport-https ca-certificates software-properties-common -y
 

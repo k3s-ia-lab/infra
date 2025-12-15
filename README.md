@@ -28,7 +28,7 @@ home lab bare metal specs:
 - Ubuntu Server 24.04 LTS
 - k3s v1.33.6+k3s1 (b5847677)
 
-[nvidia](nvidia/README.md) instructions
+[nvidia](_setup/baremetal/README.md)
 
 [k3s](k3s/README.md) instructions
 
@@ -62,11 +62,13 @@ K3s namespace k3s-ia-lab deployments/statefulsets setup order:
 ```
 ---
 
-notes...
+# Notes
 
 Don't expose this setup to the internet, it's for home lab use only. There's no security configured, no tls activated.
 
 The openfire image is a custom build with pre-configured settings for easier setup.
+
+There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn instace.
 
 ---
 
@@ -90,6 +92,7 @@ TODO:
 - dify
 - typebot
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
+- automate server setup scripts.
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
