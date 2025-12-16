@@ -75,6 +75,7 @@ There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn
 Other services:
 - [grafana](grafana/README.md)
 - [keycloak](keycloak/README.md)
+- [kubeshark](kubeshark/README.md)
 - [mcp-inspector](mcp-inspector/README.md)
 - [onedev](onedev/README.md)
 - [open-webui](open-webui/README.md)
