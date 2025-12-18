@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ollama
+  namespace: k3s-ia-lab
+  labels:
+    app: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: ollama-container
+          image: ollama/ollama:0.13.2
+          ports:
+            - containerPort: 11434
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              memory: "1Gi"
+          volumeMounts:
+            - name: ollama-storage
+              mountPath: /root/.ollama
+      volumes:
+        - name: ollama-storage
+          hostPath:
+            path: /mnt/data/ollama
+            type: DirectoryOrCreate

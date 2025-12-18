@@ -21,7 +21,7 @@ You can use local models running on Ollama or different LLM cloud services like 
 
 home lab bare metal specs:
 - Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-- 16 GB RAM DDR3 (Using about 5GB for k3s)
+- 16 GB RAM DDR3 (Using about 3.2GB **without Other services list**)
 - NVIDIA GeForce RTX 3050 8GB (Pcie 4.0 x16)
 - SSD 256GB
 - Pcie 2.0 x16
@@ -32,18 +32,10 @@ home lab bare metal specs:
 
 [k3s](_setup/k3s/README.md) instructions
 
-create postgresql with pgvector extension
+create postgresql with pgvector extension, and deploy k3s-ia-lab manifests:
 ```bash
-kubectl apply -f  postgresql/postgresql.yaml
-```
-
-Create n8n databases
-```bash
-kubectl exec -n postgresql postgres-0 -- bash -c "echo 'create database n8n;' | psql -U postgres"
-```
-
-deploy the k3s-ia-lab manifests:
-```bash
+kubectl apply -f postgresql/pgvector.yaml
+kubectl rollout status statefulset/postgres -n postgresql
 kubectl apply -f k3s-ia-lab.yaml
 ```
 
@@ -68,7 +60,9 @@ Don't expose this setup to the internet, it's for home lab use only. There's no 
 
 The openfire image is a custom build with pre-configured settings for easier setup.
 
-There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn instace.
+There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn instance.
+
+It's possible to use ollama cloud without gpu, follow [ollama doc](ollama/README.md).
 
 ---
 
@@ -85,14 +79,16 @@ Other services:
 
 TODO:
 
+- migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
+- helm charts for all services.
+- automate server setup scripts using the helmcharts with --wait.
 - supabase
 - flowise
 - chatwoot
 - evolution api
 - dify
 - typebot
-- migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
-- automate server setup scripts.
+- more db vectors for RAG labs: Qdrant and Milvus
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container

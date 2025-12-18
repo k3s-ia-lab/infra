@@ -2,7 +2,26 @@
 Install k3s
 https://docs.k3s.io/installation
 
-Install NVIDIA GPU Operator on k3s
+
+create the persistent volume folder to easy debug:
+```bash
+sudo mkdir -p /mnt/data/n8n
+sudo chmod -R 777 /mnt/data
+```
+
+edit coredns-custom.yaml with your k3s ipv4 address
+```text
+*          IN A      <your-k3s-ipv4>
+```
+
+deploy the custom coredns config to resolve k3s-ia-lab.lan domains inside cluster:
+```bash
+kubectl apply -f coredns-custom.yaml
+```
+
+---
+
+# Install NVIDIA GPU Operator on k3s (if you don't have a NVIDIA GPU, read the [ollama doc](../../ollama/README.md))
 https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/25.3.3/getting-started.html
 
 ```bash
@@ -23,20 +42,4 @@ helm install --wait nvidiagpu \
 --set toolkit.env[3].name=CONTAINERD_SET_AS_DEFAULT \
 --set-string toolkit.env[3].value=true \
 nvidia/gpu-operator
-```
-
-create the persistent volume folder to easy debug:
-```bash
-sudo mkdir -p /mnt/data/n8n
-sudo chmod -R 777 /mnt/data
-```
-
-edit coredns-custom.yaml with your k3s ipv4 address
-```text
-*          IN A      <your-k3s-ipv4>
-```
-
-deploy the custom coredns config to resolve k3s-ia-lab.lan domains inside cluster:
-```bash
-kubectl apply -f coredns-custom.yaml
 ```

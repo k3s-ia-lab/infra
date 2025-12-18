@@ -6,7 +6,7 @@ ingress:
 database:
   external: true
   type: "postgresql"
-  host: "postgres-lb.postgresql.svc.cluster.local"
+  host: "postgresql.postgresql.svc.cluster.local"
   port: "5432"
   name: "onedev"
   user: "postgres"

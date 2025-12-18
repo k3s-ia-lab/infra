@@ -227,7 +227,7 @@ spec:
             - name: DB_TYPE
               value: "postgresdb"
             - name: DB_POSTGRESDB_HOST
-              value: "postgres-lb.postgresql.svc.cluster.local"
+              value: "postgresql.postgresql.svc.cluster.local"
             - name: DB_POSTGRESDB_PORT
               value: "5432"
             - name: DB_POSTGRESDB_DATABASE

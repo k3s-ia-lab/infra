@@ -3,7 +3,7 @@ create mcp-inspector
 kubectl apply -f mcp-inspector.yaml
 ```
 
-/etc/hosts file entrie to access keycloak ingress route from your local network:
+/etc/hosts file entrie to access mcp-inspector ingress route from your local network:
 ```
 <your-k3s-ipv4> mcp-inspector.k3s-ia-lab.lan mcp-inspector-proxy.k3s-ia-lab.lan
 ```

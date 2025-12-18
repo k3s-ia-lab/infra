@@ -1,7 +1,6 @@
-create zabbix databases
+create zabbix database
 ```bash
 kubectl exec -n k3s-ia-lab postgres-0 -- bash -c "echo 'create database zabbix;' | psql -U postgres"
-kubectl exec -n k3s-ia-lab postgres-0 -- bash -c "echo 'create database zabbixweb;' | psql -U postgres"
 ```
 
 create zabbix
@@ -9,7 +8,7 @@ create zabbix
 kubectl apply -f zabbix.yaml
 ```
 
-/etc/hosts file entrie to access keycloak ingress route from your local network:
+/etc/hosts file entrie to access zabbix ingress route from your local network:
 ```
 <your-k3s-ipv4> zabbix.k3s-ia-lab.lan
 ```
