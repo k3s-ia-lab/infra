@@ -19,7 +19,7 @@ You can use local models running on Ollama or different LLM cloud services like 
 
 ---
 
-home lab bare metal specs:
+home lab bare metal specs (potatoe computer with nvidia gpu):
 - Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
 - 16 GB RAM DDR3 (Using about 3.2GB **without Other services list**)
 - NVIDIA GeForce RTX 3050 8GB (Pcie 4.0 x16)
@@ -63,6 +63,8 @@ The openfire image is a custom build with pre-configured settings for easier set
 There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn instance.
 
 It's possible to use ollama cloud without gpu, follow [ollama doc](ollama/README.md).
+
+It's possible to use another chat integration instead of xmpp/openfire, like discord, slack, telegram, whatsapp, etc. Just change the n8n workflow to use the desired chat node.
 
 ---
 
