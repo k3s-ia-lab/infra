@@ -2,4 +2,4 @@ tap:
   ingress:
     enabled: true
     className: "traefik"
-    host: ks.k3s-ia-lab.lan
+    host: ks.uaiso.lan

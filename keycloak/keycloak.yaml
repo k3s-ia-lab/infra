@@ -42,7 +42,7 @@ spec:
             - name: KC_BOOTSTRAP_ADMIN_PASSWORD
               value: admin
             - name: KC_HOSTNAME
-              value: auth.k3s-ia-lab.lan
+              value: auth.uaiso.lan
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -71,7 +71,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: auth.k3s-ia-lab.lan
+    - host: auth.uaiso.lan
       http:
         paths:
           - path: /

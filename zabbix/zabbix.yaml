@@ -81,7 +81,7 @@ spec:
             - name: POSTGRES_PASSWORD
               value: "mysecurepassword"
             - name: ZBX_SERVER_HOST
-              value: "zbx.k3s-ia-lab.lan:10051"
+              value: "zbx.uaiso.lan:10051"
             - name: POSTGRES_DB
               value: "zabbix"
             - name: PHP_TZ
@@ -115,7 +115,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: zabbix.k3s-ia-lab.lan
+    - host: zabbix.uaiso.lan
       http:
         paths:
           - path: /

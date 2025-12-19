@@ -27,7 +27,7 @@ spec:
             - name: HOST
               value: "0.0.0.0"
             - name: ALLOWED_ORIGINS
-              value: "http://mcp-inspector.k3s-ia-lab.lan"
+              value: "http://mcp-inspector.uaiso.lan"
             - name: DANGEROUSLY_OMIT_AUTH
               value: "true"
             - name: MCP_AUTO_OPEN_ENABLED
@@ -66,8 +66,8 @@ metadata:
   namespace: mcp-inspector
 spec:
   redirectRegex:
-    regex: ^(https?://)mcp-inspector\.k3s-ia-lab\.lan/?$
-    replacement: ${1}mcp-inspector.k3s-ia-lab.lan/?MCP_PROXY_FULL_ADDRESS=http://mcp-inspector-proxy.k3s-ia-lab.lan/
+    regex: ^(https?://)mcp-inspector\.uaiso\.lan/?$
+    replacement: ${1}mcp-inspector.uaiso.lan/?MCP_PROXY_FULL_ADDRESS=http://mcp-inspector-proxy.uaiso.lan/
     permanent: true
 ---
 apiVersion: networking.k8s.io/v1
@@ -81,7 +81,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.priority: "100"
 spec:
   rules:
-    - host: mcp-inspector.k3s-ia-lab.lan
+    - host: mcp-inspector.uaiso.lan
       http:
         paths:
           - path: /
@@ -91,7 +91,7 @@ spec:
                 name: inspector-service
                 port:
                   number: 6274
-    - host: mcp-inspector-proxy.k3s-ia-lab.lan
+    - host: mcp-inspector-proxy.uaiso.lan
       http:
         paths:
           - path: /

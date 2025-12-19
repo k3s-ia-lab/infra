@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: k3s-ia-lab
+  name: uaiso
 ---
 apiVersion: v1
 kind: Service
@@ -9,7 +9,7 @@ metadata:
   labels:
     app: openfire
   name: xmpp-lb
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   ports:
     - name: xmpp
@@ -27,7 +27,7 @@ metadata:
   labels:
     app: openfire
   name: openfire-service
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   ports:
     - name: admin-console
@@ -51,7 +51,7 @@ metadata:
   labels:
     app: openfire
   name: openfire
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -68,7 +68,7 @@ spec:
         - image: registry.gitlab.com/soapboxrace/openfire:5.0.2
           env:
             - name: OPENFIRE_FQDN
-              value: xmpp.k3s-ia-lab.lan
+              value: xmpp.uaiso.lan
           imagePullPolicy: Always
           name: openfire
           ports:
@@ -85,7 +85,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: ollama
-  namespace: k3s-ia-lab
+  namespace: uaiso
   labels:
     app: ollama
 spec:
@@ -130,7 +130,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ollama-service
-  namespace: k3s-ia-lab
+  namespace: uaiso
   labels:
     app: ollama
 spec:
@@ -146,7 +146,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rabbitmq
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   replicas: 1
   selector:
@@ -177,7 +177,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rabbitmq-lb
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   selector:
     app: rabbitmq
@@ -192,7 +192,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rabbitmq-service
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   selector:
     app: rabbitmq
@@ -207,7 +207,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: n8n
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   replicas: 1
   selector:
@@ -252,7 +252,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: n8n-service
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   selector:
     app: n8n
@@ -266,13 +266,13 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: k3s-ia-lab
-  namespace: k3s-ia-lab
+  name: uaiso
+  namespace: uaiso
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: n8n.k3s-ia-lab.lan
+    - host: n8n.uaiso.lan
       http:
         paths:
           - path: /
@@ -282,7 +282,7 @@ spec:
                 name: n8n-service
                 port:
                   number: 5678
-    - host: xmpp-adm.k3s-ia-lab.lan
+    - host: xmpp-adm.uaiso.lan
       http:
         paths:
           - path: /
@@ -292,7 +292,7 @@ spec:
                 name: openfire-service
                 port:
                   number: 9090
-    - host: rabbitmq.k3s-ia-lab.lan
+    - host: rabbitmq.uaiso.lan
       http:
         paths:
           - path: /
@@ -302,7 +302,7 @@ spec:
                 name: rabbitmq-service
                 port:
                   number: 15672
-    - host: ollama.k3s-ia-lab.lan
+    - host: ollama.uaiso.lan
       http:
         paths:
           - path: /
@@ -318,25 +318,25 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: xmppweb-redirect
-  namespace: k3s-ia-lab
+  namespace: uaiso
 spec:
   redirectRegex:
-    regex: ^(https?://)xmpp\.k3s-ia-lab\.lan/?$
-    replacement: ${1}xmpp.k3s-ia-lab.lan/xmppweb/
+    regex: ^(https?://)xmpp\.uaiso\.lan/?$
+    replacement: ${1}xmpp.uaiso.lan/xmppweb/
     permanent: true
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: xmpp
-  namespace: k3s-ia-lab
+  namespace: uaiso
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
-    traefik.ingress.kubernetes.io/router.middlewares: k3s-ia-lab-xmppweb-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: uaiso-xmppweb-redirect@kubernetescrd
     traefik.ingress.kubernetes.io/router.priority: "100"
 spec:
   rules:
-    - host: xmpp.k3s-ia-lab.lan
+    - host: xmpp.uaiso.lan
       http:
         paths:
           - path: /

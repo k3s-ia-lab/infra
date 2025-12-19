@@ -29,15 +29,15 @@ spec:
               protocol: TCP
           env:
             - name: OLLAMA_BASE_URL
-              value: "http://ollama-service.k3s-ia-lab.svc.cluster.local:11434"
+              value: "http://ollama-service.uaiso.svc.cluster.local:11434"
             - name: WEBUI_URL
-              value: "http://open-webui.k3s-ia-lab.lan/"
+              value: "http://open-webui.uaiso.lan/"
             - name: OPENID_PROVIDER_URL
-              value: "http://auth.k3s-ia-lab.lan/realms/k3s-ia-lab/.well-known/openid-configuration"
+              value: "http://auth.uaiso.lan/realms/uaiso/.well-known/openid-configuration"
             - name: OAUTH_CLIENT_ID
               value: "open-webui-client"
             - name: OAUTH_CLIENT_SECRET
-              value: "**********"
+              value: "AEm8dhQuIKaRBwqhaj9q3tscD36PEOI3"
             - name: ENABLE_OAUTH_SIGNUP
               value: "true"
             - name: OAUTH_PROVIDER_NAME
@@ -45,11 +45,11 @@ spec:
             - name: OAUTH_SCOPES
               value: "openid email profile"
             - name: OPENID_REDIRECT_URI
-              value: "http://open-webui.k3s-ia-lab.lan/oauth/oidc/callback"
+              value: "http://open-webui.uaiso.lan/oauth/oidc/callback"
             - name: DEFAULT_USER_ROLE
               value: "admin"
             - name: WEBUI_AUTH_SIGNOUT_REDIRECT_URL
-              value: "http://open-webui.k3s-ia-lab.lan"
+              value: "http://open-webui.uaiso.lan"
             - name: ENABLE_PASSWORD_AUTH
               value: "false"
             - name: ENABLE_LOGIN_FORM
@@ -100,7 +100,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: open-webui.k3s-ia-lab.lan
+    - host: open-webui.uaiso.lan
       http:
         paths:
           - path: /

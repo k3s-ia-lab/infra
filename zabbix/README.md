@@ -1,19 +1,16 @@
-create zabbix database
-```bash
-kubectl exec -n k3s-ia-lab postgres-0 -- bash -c "echo 'create database zabbix;' | psql -U postgres"
-```
-
 create zabbix
+
 ```bash
 kubectl apply -f zabbix.yaml
 ```
 
 /etc/hosts file entrie to access zabbix ingress route from your local network:
+
 ```
-<your-k3s-ipv4> zabbix.k3s-ia-lab.lan
+<your-k3s-ipv4> zabbix.uaiso.lan
 ```
 
-http://zabbix.k3s-ia-lab.lan
+http://zabbix.uaiso.lan
 
 https://www.zabbix.com/download?zabbix=7.4&os_distribution=ubuntu&os_version=24.04&components=agent_2&db=&ws=
 
@@ -26,11 +23,13 @@ apt install zabbix-agent2-plugin-nvidia-gpu
 ```
 
 edit config /etc/zabbix/zabbix_agent2.conf
+
 ```text
 Server=0.0.0.0/0
  ```
 
 start agent
+
 ```bash
 systemctl restart zabbix-agent2
 systemctl enable zabbix-agent2
