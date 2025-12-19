@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: ollama
-  namespace: k3s-ia-lab
+  namespace: uaiso
   labels:
     app: ollama
 spec:
@@ -16,6 +16,7 @@ spec:
         app: ollama
     spec:
       restartPolicy: Always
+      runtimeClassName: nvidia
       containers:
         - name: ollama-container
           image: ollama/ollama:0.13.2
@@ -25,7 +26,13 @@ spec:
               protocol: TCP
           resources:
             limits:
+              nvidia.com/gpu: 1
               memory: "1Gi"
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: all
           volumeMounts:
             - name: ollama-storage
               mountPath: /root/.ollama

@@ -1,7 +1,7 @@
 ingress:
   enabled: true
   className: "traefik"
-  host: "onedev.k3s-ia-lab.lan"
+  host: "onedev.uaiso.lan"
 
 database:
   external: true

@@ -19,7 +19,7 @@ Configure g4dn.xlarge with Amazon Linux 2023 AMI, launch instance, security grou
 inside the instance, run the nvidia setup script and reboot:
 ```bash
 sudo dnf install git -y
-git clone https://github.com/k3s-ia-lab/infra.git
+git clone https://github.com/uaiso-serious/infra.git
 ./infra/_setup/aws/nvidia-aws-al2023.sh
 sudo reboot
 ```
@@ -71,7 +71,7 @@ docker stop ollama
 
 setup k3s:
 ```bash
-sudo ./infra/_setup/aws/k3s-ia-lab-aws-al2023.sh
+sudo ./infra/_setup/aws/uaiso-aws-al2023.sh
 ```
 edit /etc/fstab to automount  /dev/nvme0n1p1 into /mnt after rebooting
 

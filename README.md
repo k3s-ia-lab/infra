@@ -1,17 +1,24 @@
-# UaiSo - Serious?
+# UaiSo - Serious? (Why so serious?)
 
 Unchained Artificial Intelligence Stack/Sandbox Ops/Open -- Why so serious about AI?
 
+Just an AI playground with a nice hello world example.
+
+Easy to deploy, low hardware requirements, with nice tools to debug.
+
+It's possible to integrate LLM with MCP server (like ssh and playright), RAG, VectorDB, and **much more**.
+
 ---
 
-This project contains k3s (lightweight Kubernetes) deployment manifests for my home lab setup.
+This project contains k3s (lightweight Kubernetes) deployment manifests for a home lab setup.
 
 # Integration between XMPP, n8n, and AI (Ollama)
 
 This project not only provisions services in the K3s cluster but also demonstrates how they can work together to create
 a complete experience:
 
-You can use any XMPP client (such as Pidgin, Gajim Dino, web-xmpp) to connect to the Openfire server.
+You can use any XMPP client (such as Pidgin, Gajim Dino) to connect to the Openfire server.
+Web-xmpp included inside openfire, no need to install xmpp client to test.
 
 A n8n workflow acts as a bridge, receiving messages from the user and sending them to the LLM running on Ollama, then
 returning the response directly in the chat.
@@ -24,35 +31,40 @@ The architecture looks like this:
 
 When it's running, is possible to "talk" with Ollama using jabber/xmpp client using n8n workflows.
 
-You can use local models running on Ollama or different LLM cloud services
-like [OpenAI](https://openai.com/), [Antropic](https://www.anthropic.com/), Deepseek, Google Gemini, Aws bedrock, Groq,
-or any available n8n nodes.
+---
+
+# Hardware/network/so requirements:
+
+- Minimum 4GB RAM
+- Minimum 2 CPU cores
+- Minimum 80GB disk space
+- (Optional) NVIDIA GPU for local LLM models
+- Internet access to download container images and LLM models
+- Ubuntu 24.04 LTS
 
 ---
 
-home lab bare metal specs (potatoe computer with nvidia gpu):
+# LLM api servers that you can use:
 
-- Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-- 16 GB RAM DDR3 (Using about 3.2GB **without Other services list**)
-- NVIDIA GeForce RTX 3050 8GB (Pcie 4.0 x16)
-- SSD 256GB
-- Pcie 2.0 x16
-- Ubuntu Server 24.04 LTS
-- k3s v1.33.6+k3s1 (b5847677)
+- Ollama local models (requires [nvidia instructions](_setup/baremetal/README.md))
+- Ollama cloud models (requires ollama account, **free tier available**)
+- Any available n8n nodes for LLM cloud services (require api keys),
+  like, [OpenAI](https://openai.com/) [Antropic](https://www.anthropic.com/), Deepseek, Google Gemini, Aws bedrock, Groq
 
-[nvidia](_setup/baremetal/README.md) instructions
+---
 
-[k3s](_setup/k3s/README.md) instructions
+# Quick start deployment instructions:
 
-create postgresql with pgvector extension, and deploy uaiso manifests:
+run the following commands to deploy the working setup:
 
 ```bash
-kubectl apply -f postgresql/pgvector.yaml
-kubectl rollout status statefulset/postgres -n postgresql
-kubectl apply -f uaiso.yaml
+git clone https://github.com/uaiso-serious/infra.git
+./infra/_setup/basic.sh
 ```
 
-K3s namespace uaiso deployments/statefulsets setup order:
+---
+
+# K3s namespace uaiso deployments/statefulsets details:
 
 | service readme                 | http ingress                                      |
 |--------------------------------|---------------------------------------------------|
@@ -61,54 +73,47 @@ K3s namespace uaiso deployments/statefulsets setup order:
 | [rabbitmq](rabbitmq/README.md) | http://rabbitmq.uaiso.lan                         |
 | [n8n](n8n/README.md)           | http://n8n.uaiso.lan/                             |
 
-/etc/hosts file entrie to access the ingress routes from your local network:
+---
 
+# DNS considerations
+
+Use ssh tunnel with dynamic port forwarding to access the services from your local network:
+
+```bash
+ssh <your-k3s-ipv4> -D 7777
 ```
-<your-k3s-ipv4> n8n.uaiso.lan ollama.uaiso.lan xmpp.uaiso.lan xmpp-adm.uaiso.lan rabbitmq.uaiso.lan
-```
+
+Use socks proxy in your browser or system resolve the *.uaiso.lan dns and access the ingress routes.
+
+Alternatively, you can edit your /etc/hosts file, just like the ./infra/_setup/basic.sh did inside the k3s host.
+
+If you have a dns server in your home network (like pihole for example), you can add wildcard dns entry for *.uaiso.lan
+pointing to your k3s host ip address.
 
 ---
 
 # Notes
 
-Don't expose this setup to the internet, it's for home lab use only. There's no security configured, no tls activated.
+**Don't expose this setup to the internet**! It's for home lab use only. There's no security configured, no tls
+activated.
 
 The openfire image is a custom build with pre-configured settings for easier setup.
-
-There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn instance.
-
-It's possible to use ollama cloud without gpu, follow [ollama doc](ollama/README.md).
 
 It's possible to use another chat integration instead of xmpp/openfire, like discord, slack, telegram, whatsapp, etc.
 Just change the n8n workflow to use the desired chat node.
 
 ---
 
-Other services:
+# My personal home lab bare metal specs (potatoe computer with nvidia gpu):
 
-- [grafana](grafana/README.md)
-- [keycloak](keycloak/README.md)
-- [kubeshark](kubeshark/README.md)
-- [mcp-inspector](mcp-inspector/README.md)
-- [onedev](onedev/README.md)
-- [open-webui](open-webui/README.md)
-- [zabbix](zabbix/README.md)
+- Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+- 16 GB RAM DDR3 (Using about 3.2GB)
+- NVIDIA GeForce RTX 3050 8GB VRAM (Pcie 4.0 x16)
+- SSD 256GB
+- Pcie 2.0 x16
+- Ubuntu Server 24.04 LTS
+- k3s v1.33.6+k3s1 (b5847677)
 
----
+Don't have hardware? You can try aws.
 
-TODO:
-
-- migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
-- automate server setup scripts.
-- upgrade n8n to 2.x.
-- supabase
-- flowise
-- chatwoot
-- evolution api
-- dify
-- typebot
-- more db vectors for RAG labs: Qdrant and Milvus
-- custom ubuntu container with dev, ops, network tools, ia-console tools.
-- ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
-- playright test runner container
-- playright mcp server (allow LLM to execute the playright test runner)
+There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn instance.

@@ -15,7 +15,7 @@ data:
     @       3600 IN SOA    sns.dns.icann.org. noc.dns.icann.org. 2017042745 7200 3600 1209600 3600
             3600 IN NS     a.iana-servers.net.
             3600 IN NS     b.iana-servers.net.
-    *          IN A      192.168.13.13
+    *          IN A      127.0.0.1
   empty.override: |
     #
   empty.server: |

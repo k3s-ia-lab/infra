@@ -1,0 +1,35 @@
+#!/bin/bash
+
+mkdir -p /mnt/k3s-data
+mkdir -p /mnt/data/{n8n,ollama}
+chmod -R 777 /mnt/data
+
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--data-dir /mnt/k3s-data" sh -
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+
+HOST_IP=$(hostname -I | awk '{print $1}')
+
+echo "
+$HOST_IP n8n.uaiso.lan \
+ollama.uaiso.lan \
+xmpp.uaiso.lan \
+xmpp-adm.uaiso.lan \
+rabbitmq.uaiso.lan \
+grafana.uaiso.lan \
+auth.uaiso.lan \
+ks.uaiso.lan \
+mcp-inspector.uaiso.lan \
+mcp-inspector-proxy.uaiso.lan \
+onedev.uaiso.lan \
+open-webui.uaiso.lan \
+zabbix.uaiso.lan" >> /etc/hosts
+
+sed -i "s/127\.0\.0\.1/$HOST_IP/g" .k3s/coredns-custom.yaml
+kubectl apply -f .k3s/coredns-custom.yaml
+
+kubectl apply -f postgresql/pgvector.yaml
+kubectl rollout status statefulset/postgres -n postgresql
+kubectl apply -f uaiso.yaml
