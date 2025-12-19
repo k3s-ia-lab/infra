@@ -25,7 +25,11 @@ returning the response directly in the chat.
 
 The architecture looks like this:
 
-```plantuml
+XMPP Client <-> Openfire <-> n8n <-> Ollama LLM Integration
+
+![xmpp_llm.svg](xmpp_llm.svg)
+
+<!--
 @startuml
 title XMPP Client <-> Openfire <-> n8n <-> Ollama LLM Integration
 actor "User (XMPP Client)" as User
@@ -40,7 +44,7 @@ Ollama -> n8n : Return LLM response
 n8n -> Openfire : Forwards response
 Openfire -> User : Delivery response
 @enduml
-```
+-->
 
 When it's running, is possible to "talk" with Ollama using jabber/xmpp client using n8n workflows.
 
