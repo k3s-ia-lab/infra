@@ -27,9 +27,9 @@ onedev.uaiso.lan \
 open-webui.uaiso.lan \
 zabbix.uaiso.lan" >> /etc/hosts
 
-sed -i "s/127\.0\.0\.1/$HOST_IP/g" .k3s/coredns-custom.yaml
-kubectl apply -f .k3s/coredns-custom.yaml
+sed -i "s/127\.0\.0\.1/$HOST_IP/g" ./infra/_setup/k3s/coredns-custom.yaml
+kubectl apply -f ./infra/_setup/k3s/coredns-custom.yaml
 
-kubectl apply -f postgresql/pgvector.yaml
+kubectl apply -f ./infra/postgresql/pgvector.yaml
 kubectl rollout status statefulset/postgres -n postgresql
 kubectl apply -f uaiso.yaml
