@@ -94,18 +94,17 @@ git clone https://github.com/uaiso-serious/infra.git
 
 # DNS considerations
 
-Use ssh tunnel with dynamic port forwarding to access the services from your local network:
+There's a ssh tunnel with dynamic port forwarding listening on <your-k3s-ipv4> port 1080.
 
-```bash
-ssh <your-k3s-ipv4> -D 7777
-```
+Use socks proxy in your browser to resolve the *.uaiso.lan dns and access the ingress routes.
 
-Use socks proxy in your browser or system resolve the *.uaiso.lan dns and access the ingress routes.
+You can configure your browser to use a socks5 proxy manually, or use an extension like FoxyProxy.
 
-Alternatively, you can edit your /etc/hosts file, just like the ./infra/_setup/basic.sh did inside the k3s host.
+[FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
 
-If you have a dns server in your home network (like pihole for example), you can add wildcard dns entry for *.uaiso.lan
-pointing to your k3s host ip address.
+[FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
+
+Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration instructions.
 
 ---
 
