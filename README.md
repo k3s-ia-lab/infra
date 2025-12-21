@@ -1,11 +1,10 @@
 # TL;DR
 
-- Create a vm, or get a potatoe computer with ubuntu 24.04 server installed with ssh access, plugged in your lan.
-- Run the quick start deployment instructions.
-- Configure your browser to use socks5 proxy pointint to <your-server-ipv4:1080> to access the services.
-- open http://xmpp.uaiso.lan (admin/admin) with your browser.
-- talk to severino bot.
-- now go back to this README to understand how it works and start playing.
+- This is a home lab k3s deployment for AI experimentation.
+- Can be used in case of zombie apocalypse (100% private and off-grid).
+- There's a simple hello world example.
+- N8n is a huge plus, you can create complex workflows. Like telling your bot to trigger your mindstorm legobot using a
+  raspberry pi to unplug the energy source of this skynet lab in case of emergency.
 
 ---
 
