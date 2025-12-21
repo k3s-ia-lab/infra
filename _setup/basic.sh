@@ -32,8 +32,8 @@ zabbix.uaiso.lan" >> /etc/hosts
 sed -i "s/127\.0\.0\.1/$HOST_IP/g" ./infra/_setup/k3s/coredns-custom.yaml
 kubectl apply -f ./infra/_setup/k3s/coredns-custom.yaml
 
-echo "y" | ssh-keygen -t ed25519 -C "openssh docker image public ed25519 uaiso-key" -f uaiso-key -q -N ""
-cat uaiso-key.pub >> /root/.ssh/authorized_keys
+echo "y" | ssh-keygen -t ed25519 -C "openssh docker image public ed25519 uaiso-key" -f /root/.ssh/uaiso-key -q -N ""
+cat /root/.ssh/uaiso-key.pub >> /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 kubectl create ns ssh-socks5
 kubectl create secret generic ssh-key-secret --from-file=ed25519=/root/.ssh/uaiso-key --namespace=ssh-socks5
