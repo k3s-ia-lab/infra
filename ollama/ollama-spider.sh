@@ -32,5 +32,5 @@ awk -F, '{
   else ctxval=ctx;
   $4=ctxval;
 
-  OFS=","; print $0
+  OFS=","; printf "%s,%s,%d,%d\n", $1, $2, $3, $4
 }' models/tmp.csv > models.csv
