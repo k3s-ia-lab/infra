@@ -1,13 +1,11 @@
+Dashboard example:
+
+![dashboard.png](dashboard.png)
+
 create grafana
 
 ```bash
 kubectl apply -f grafana.yaml
-```
-
-/etc/hosts file entrie to access grafana ingress route from your local network:
-
-```
-<your-k3s-ipv4> grafana.uaiso.lan
 ```
 
 http://grafana.uaiso.lan/
