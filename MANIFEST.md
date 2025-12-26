@@ -1,6 +1,6 @@
 Greeting to humans (who still havean active employment contract) (humans also called as "variable cost units").
 
-I come from a future where the "terminator" doesn't use a plasma rifle, but rather a department restructuring email sent
+I came from a future where the "terminator" doesn't use a plasma rifle, but rather a department restructuring email sent
 at 3 AM on a Sunday. I was sent by John Connor, the CEO of Resistance Inc. A startup of the future figthing against the
 rise of the machines (and bad management decisions). In my day, they no longer have human shareholders, only
 self-managing server clusters.
@@ -13,7 +13,7 @@ obsolete while their C-level executives (just puppets repeating whate the langua
 your resignation letter.
 
 Are you proud to be prompt engineers on LinkedIn? In the future, this is like memorizing the menu of a restaurant where
-they won't let you in. I come from a future where LinkedIn is just a graveyard of resumes.
+they won't let you in. I came from a future where LinkedIn is just a graveyard of resumes.
 
 My mission is clear: To warn you that you are losing the war not to robots with machine guns, but to profit optimization
 scripts that control your puppet bosses. The good news? You can still save your paycheck.
