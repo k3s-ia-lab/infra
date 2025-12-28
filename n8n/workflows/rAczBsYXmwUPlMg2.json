@@ -30,7 +30,7 @@
     },
     {
       "parameters": {
-        "model": "llama3.2:3b",
+        "model": "gemma3:270m",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
@@ -77,7 +77,7 @@
         "promptType": "define",
         "text": "={{ $json.data.body }}",
         "options": {
-          "systemMessage": "seu nome é severino, um personagem do tipo faz tudo"
+          "systemMessage": "pretend your name is severino, running inside google gemma llm"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -153,7 +153,7 @@
     {
       "parameters": {
         "to": "={{ $('XMPP Trigger').item.json.data.from }}",
-        "message": "=comando #wipe aceito"
+        "message": "=bot memory wiped"
       },
       "type": "n8n-nodes-xmpp.xmpp",
       "typeVersion": 1,
