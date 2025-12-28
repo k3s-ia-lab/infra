@@ -71,7 +71,7 @@ But... I like the irc idea... maybe in the future.
 
 - Minimum 4GB RAM
 - Minimum 2 CPU cores
-- Minimum 80GB disk space
+- Minimum 30GB disk (ubuntu + k3s + container images + LLM models)
 - (Optional) NVIDIA GPU for local LLM models
 - Internet access to download container images and LLM models
 - Ubuntu 24.04 LTS

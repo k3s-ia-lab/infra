@@ -63,10 +63,10 @@ spec:
       containers:
         - image: ghcr.io/uaiso-serious/openfire:5.0.3v1
           readinessProbe:
-            httpGet:
-              path: /plugins/restapi/v1/system/readiness
-              port: 9090
-            initialDelaySeconds: 15
+            exec:
+              command:
+                - /opt/readiness.sh
+            initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
