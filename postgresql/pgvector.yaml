@@ -10,6 +10,7 @@ metadata:
   namespace: postgresql
 data:
   init.sql: |
+    CREATE DATABASE openfire;
     CREATE DATABASE n8n;
     CREATE DATABASE onedev;
     CREATE DATABASE zabbix;

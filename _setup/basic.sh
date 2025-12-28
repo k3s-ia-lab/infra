@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p /mnt/k3s-data /mnt/data/{n8n,ollama} /root/.ssh /root/.kube
+mkdir -p /mnt/k3s-data /mnt/data/{n8n,ollama,openfire} /root/.ssh /root/.kube
 chmod -R 777 /mnt/data
 
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--data-dir /mnt/k3s-data" sh -
@@ -47,6 +47,36 @@ kubectl apply -f ./infra/postgresql/pgvector.yaml
 kubectl -n postgresql rollout status statefulset/postgres
 
 kubectl apply -f ./infra/uaiso.yaml
+
+kubectl -n uaiso rollout status statefulset/openfire
+ofproperty () {
+  key=$1
+  value=$2
+  curl \
+    'http://xmpp-adm.uaiso.lan/plugins/restapi/v1/system/properties' \
+    -H 'accept: */*' \
+    -H 'Authorization: secretkey123' \
+    -H 'Content-Type: application/json' \
+    -d "{\"key\": \"${key}\", \"value\": \"${value}\"}"
+}
+ofproperty 'xmppweb.config.transports.websocket' 'ws://xmpp.uaiso.lan/ws/'
+ofproperty 'plugin.subscription.level' 'all'
+ofproperty 'plugin.subscription.type' 'accept'
+ofproperty 'sasl.mechs.00001' 'PLAIN'
+ofproperty 'xmpp.client.tls.policy' 'disabled'
+curl \
+  'http://xmpp-adm.uaiso.lan/plugins/restapi/v1/users' \
+  -H 'Authorization: secretkey123' \
+  -H 'Content-Type: application/json' \
+  -d '{"username": "severino","password": "123"}'
+curl \
+  'http://xmpp-adm.uaiso.lan/plugins/restapi/v1/users/admin/roster' \
+  -H 'accept: */*' \
+  -H 'Authorization: secretkey123' \
+  -H 'Content-Type: application/json' \
+  -d '{"jid": "severino@xmpp.uaiso.lan","nickname": "severino","subscriptionType": 1}'
+kubectl -n uaiso delete pod openfire-0
+kubectl -n uaiso rollout status statefulset/openfire
 
 kubectl -n uaiso rollout status statefulset/n8n
 kubectl -n uaiso exec n8n-0 -- ash -c "git clone https://github.com/uaiso-serious/infra.git /tmp/infra"

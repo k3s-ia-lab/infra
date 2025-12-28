@@ -44,18 +44,14 @@ spec:
   type: ClusterIP
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "1"
   labels:
     app: openfire
   name: openfire
   namespace: uaiso
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: openfire
@@ -65,10 +61,30 @@ spec:
         app: openfire
     spec:
       containers:
-        - image: registry.gitlab.com/soapboxrace/openfire:5.0.2
+        - image: ghcr.io/uaiso-serious/openfire:5.0.3v1
+          readinessProbe:
+            httpGet:
+              path: /plugins/restapi/v1/system/readiness
+              port: 9090
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
           env:
-            - name: OPENFIRE_FQDN
+            - name: FQDN
               value: xmpp.uaiso.lan
+            - name: DOMAIN
+              value: xmpp.uaiso.lan
+            - name: REST_API_SECRET
+              value: secretkey123
+            - name: DB_TYPE
+              value: postgres
+            - name: DB_SERVER_URL
+              value: jdbc:postgresql://postgresql.postgresql.svc.cluster.local:5432/openfire
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: mysecurepassword
           imagePullPolicy: Always
           name: openfire
           ports:
@@ -78,6 +94,14 @@ spec:
               protocol: TCP
             - containerPort: 7070
               protocol: TCP
+          volumeMounts:
+            - name: openfire-storage
+              mountPath: /data
+      volumes:
+        - name: openfire-storage
+          hostPath:
+            path: /mnt/data/openfire
+            type: DirectoryOrCreate
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 ---
