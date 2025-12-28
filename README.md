@@ -67,12 +67,11 @@ But... I like the irc idea... maybe in the future.
 
 ---
 
-# Hardware/network/so requirements:
+# Hardware/network/so requirements (to see the hello world example working):
 
 - Minimum 4GB RAM
 - Minimum 2 CPU cores
-- Minimum 30GB disk (ubuntu + k3s + container images + LLM models)
-- (Optional) NVIDIA GPU for local LLM models
+- Minimum 20GB disk (ubuntu + k3s + container images + LLM models)
 - Internet access to download container images and LLM models
 - Ubuntu 24.04 LTS
 
@@ -82,21 +81,33 @@ I really recommend using a separate machine or vm for this setup, don't use your
 
 # LLM api servers that you can use:
 
-- Ollama local models (requires [nvidia instructions](_setup/baremetal/README.md)) 100% off-grid and private.
+- Ollama local models (better with [nvidia instructions](_setup/baremetal/README.md)) 100% off-grid and private.
 - Ollama cloud models (requires ollama account, **free tier available**).
 - Any available n8n nodes for LLM cloud services (require api keys),
   like, [OpenAI](https://openai.com/) [Antropic](https://www.anthropic.com/), Deepseek, Google Gemini, Aws bedrock, Groq
 
 ---
 
-# Quick start deployment instructions:
+# Quick start instructions:
 
-run the following commands as root to deploy the working setup:
+run the following commands as root inside the machine or vm to deploy the working setup:
 
 ```bash
 git clone https://github.com/uaiso-serious/infra.git
 ./infra/_setup/basic.sh
 ```
+
+Takes about 10 minutes to download container images and LLM models depending on your internet speed. You can use k9s
+command to check the pod status.
+
+Configure your browser to use a socks5 proxy to access the ingress routes, point it to <your-k3s-ipv4> port 1080.
+
+Easy proxy stuff with [FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
+or [FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
+
+Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration instructions for DNS ninjas.
+
+Open http://xmpp.uaiso.lan/ login as admin/admin, say hi to severino bot.
 
 ---
 
@@ -108,22 +119,6 @@ git clone https://github.com/uaiso-serious/infra.git
 | [openfire](openfire/README.md) | http://xmpp.uaiso.lan/ http://xmpp-adm.uaiso.lan/ |
 | [rabbitmq](rabbitmq/README.md) | http://rabbitmq.uaiso.lan                         |
 | [n8n](n8n/README.md)           | http://n8n.uaiso.lan/                             |
-
----
-
-# DNS considerations
-
-There's a ssh tunnel with dynamic port forwarding listening on <your-k3s-ipv4> port 1080.
-
-Use socks proxy in your browser to resolve the *.uaiso.lan dns and access the ingress routes.
-
-You can configure your browser to use a socks5 proxy manually, or use an extension like FoxyProxy.
-
-[FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
-
-[FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
-
-Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration instructions.
 
 ---
 

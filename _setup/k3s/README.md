@@ -2,6 +2,16 @@
 
 the traefik ingress is configured to route *.uaiso.lan domains to the services deployed in the k3s cluster.
 
+There's an ssh tunnel with dynamic port forwarding listening on <your-k3s-ipv4> port 1080.
+
+Use socks proxy in your browser to resolve the *.uaiso.lan dns and access the ingress routes.
+
+You can configure your browser to use a socks5 proxy manually, or use an extension like FoxyProxy.
+
+[FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
+
+[FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
+
 ---
 
 # Ssh tunnel with dynamic port forwarding
