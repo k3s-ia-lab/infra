@@ -49,6 +49,17 @@ kubectl -n postgresql rollout status statefulset/postgres
 kubectl apply -f ./infra/uaiso.yaml
 
 kubectl -n uaiso rollout status statefulset/openfire
+
+echo "--- Waiting openfire ingress..."
+while true; do
+  HTTPCODE=$(curl -o /dev/null -I -s -w "%{http_code}\n" http://xmpp-adm.uaiso.lan/plugins/restapi/v1/system/readiness)
+  if [ "$HTTPCODE" = "200" ]; then
+    echo "--- openfire ingress ok"
+    break
+  fi
+  sleep 1
+done
+
 ofproperty () {
   key=$1
   value=$2
