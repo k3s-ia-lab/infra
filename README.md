@@ -123,7 +123,7 @@ Open http://xmpp.uaiso.lan/ login as admin/admin, say hi to severino bot.
 # Notes
 
 **Don't expose this setup to the internet**! It's for home lab use only. There's no security configured, no tls
-activated.
+activated. Default service ports and weak default passwords are used.
 
 The openfire image is a custom build with pre-configured settings for easier setup.
 
