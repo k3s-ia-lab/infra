@@ -2,11 +2,11 @@
 
 the traefik ingress is configured to route *.uaiso.lan domains to the services deployed in the k3s cluster.
 
-There's an ssh tunnel with dynamic port forwarding listening on <your-k3s-ipv4> port 1080.
+There's a squid proxy running on &lt;your-k3s-ipv4&gt; port 3128.
 
-Use socks proxy in your browser to resolve the *.uaiso.lan dns and access the ingress routes.
+Use http proxy in your browser to resolve the *.uaiso.lan dns and access the ingress routes.
 
-You can configure your browser to use a socks5 proxy manually, or use an extension like FoxyProxy.
+You can configure your browser to use a http proxy manually, or use an extension like FoxyProxy.
 
 [FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
 
@@ -14,17 +14,10 @@ You can configure your browser to use a socks5 proxy manually, or use an extensi
 
 ---
 
-# Ssh tunnel with dynamic port forwarding
+# Squid proxy
 
-the [basic.sh](../basic.sh) script changes the system's `/etc/hosts` file to add the necessary DNS entries for the
-services deployed in the K3s cluster.
-
-Also, creates a namespace called ssh-socks5 with a deployment that runs a ssh tunnel with dynamic port forwarding on
-port 1080. For that, it uses the ssh key generated during the basic.sh execution, placing the public key inside
-/root/.ssh/authorized_keys.
-
-If you don't like the idea, you can remove the line from /etc/hosts, delete the ssh-socks5 namespace and remove the ssh
-key from authorized_keys.
+The [basic.sh](../basic.sh) script changes the system's `/etc/hosts` file to add the necessary DNS entries for the
+services deployed in the K3s cluster. And deploy a squid proxy running on &lt;your-k3s-ipv4&gt; port 3128.
 
 ---
 
@@ -59,12 +52,9 @@ Then configure your browser to use a socks5 proxy on localhost:1080
 - configure the vpn server to push custom dns entries for *.uaiso.lan to the clients
 - connect your computer to the vpn
 
-## Option 5: Use a proxy service that allows custom dns entries
+## Option 5: SOCKS5 Proxy deployment with SSH Dynamic Port Forwarding
 
-- create a proxy service like sshuttle, squid, etc
-- configure the proxy server to resolve custom dns entries for *.uaiso.lan
-- configure your computer to use the proxy server
-
+[README_SOCKS.md](README_SOCKS.md)
 ---
 
 Probably there are more workarounds, feel free to try, it's your lab playground. You can become a DNS ninja!

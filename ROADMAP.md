@@ -3,6 +3,7 @@ ROADMAP:
 
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
 - upgrade n8n to 2.x.
+- split setup scripts, k3s install, and k3s deployments.
 - supabase
 - flowise
 - chatwoot

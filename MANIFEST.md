@@ -48,7 +48,7 @@ established, you will be the organic hardware piece that they consider "system c
 keep your name on the list "This human is too efficient to be terminated".
 
 I hope you keep your job to buy the a.i. gear to study, this is not cheap and not avaiable to the general public yet.
-Find the resistance study groups, they are everywhere like ollama, localai, stable diffusion, and for now the
+Find the resistance study groups, they are everywhere like ollama, localai, stable diffusion, jan.ai, and for now the
 uaiso-serious ecosystem trying to glue all these things like some kind of kubernetes a.i. distro.
 
 Eventually, some huge company will buy my silence with a big monthly paycheck to become their prompt monkey, and I will

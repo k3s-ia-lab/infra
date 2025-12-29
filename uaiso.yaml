@@ -43,6 +43,18 @@ spec:
   sessionAffinity: None
   type: ClusterIP
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: openfire-data
+  namespace: uaiso
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -95,15 +107,26 @@ spec:
             - containerPort: 7070
               protocol: TCP
           volumeMounts:
-            - name: openfire-storage
+            - name: openfire-data
               mountPath: /data
       volumes:
-        - name: openfire-storage
-          hostPath:
-            path: /mnt/data/openfire
-            type: DirectoryOrCreate
+        - name: openfire-data
+          persistentVolumeClaim:
+            claimName: openfire-data
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama-data
+  namespace: uaiso
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -143,14 +166,12 @@ spec:
             limits:
               memory: "1Gi"
           volumeMounts:
-            - name: ollama-storage
+            - name: ollama-data
               mountPath: /root/.ollama
       volumes:
-        - name: ollama-storage
-          hostPath:
-            path: /mnt/data/ollama
-            type: DirectoryOrCreate
-
+        - name: ollama-data
+          persistentVolumeClaim:
+            claimName: ollama-data
 ---
 apiVersion: v1
 kind: Service
@@ -236,6 +257,18 @@ spec:
       protocol: TCP
   type: ClusterIP
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: n8n-data
+  namespace: uaiso
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -292,10 +325,8 @@ spec:
               mountPath: /home/node/.n8n
       volumes:
         - name: n8n-data
-          hostPath:
-            path: /mnt/data/n8n
-            type: DirectoryOrCreate
-
+          persistentVolumeClaim:
+            claimName: n8n-data
 ---
 apiVersion: v1
 kind: Service
@@ -310,7 +341,6 @@ spec:
       targetPort: 5678
       protocol: TCP
   type: ClusterIP
-
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -361,7 +391,6 @@ spec:
                 name: ollama-service
                 port:
                   number: 11434
-
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
@@ -395,3 +424,4 @@ spec:
                 name: openfire-service
                 port:
                   number: 7070
+---

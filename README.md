@@ -1,7 +1,7 @@
 # TL;DR
 
 - This is a home lab k3s deployment for AI experimentation.
-- Can be used in case of zombie apocalypse (100% private and off-grid).
+- Local first, privacy first, off-grid first (good to practice compliance stuff).
 - There's a simple hello world example.
 - N8n is a huge plus, you can create complex workflows. Like telling your bot to trigger your mindstorm legobot using a
   raspberry pi to unplug the energy source of this skynet lab in case of emergency.
@@ -13,8 +13,6 @@
 Unchained Artificial Intelligence Stack/Sandbox Ops/Open -- Why so serious about AI?
 
 This project contains k3s (lightweight Kubernetes) deployment manifests for a home lab setup.
-
-Just an AI playground with a hello world example.
 
 Easy to deploy, low hardware requirements, with tools to debug.
 
@@ -61,7 +59,7 @@ and playright, custom MCP servers), RAG, VectorDB, and **much more**.
 XMPP is an open standard protocol, and running your own XMPP server gives you full control over your data and privacy.
 Don't need to rely on third-party services and their rules and rate limits.
 
-Also, it's nice to have in case of a zombie apocalypse, your setup is 100% off-grid, no internet required.
+Also, after installing, your setup is 100% off-grid, no internet required.
 
 But... I like the irc idea... maybe in the future.
 
@@ -100,7 +98,7 @@ git clone https://github.com/uaiso-serious/infra.git
 Takes about 10 minutes to download container images and LLM models depending on your internet speed. You can use k9s
 command to check the pod status.
 
-Configure your browser to use a socks5 proxy to access the ingress routes, point it to &lt;your-k3s-ipv4&gt; port 1080.
+Configure your browser to use a http proxy to access the ingress routes, point it to &lt;your-k3s-ipv4&gt; port 3128.
 
 Easy proxy stuff with [FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
 or [FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
@@ -125,8 +123,6 @@ Open http://xmpp.uaiso.lan/ login as admin/admin, say hi to severino bot.
 **Don't expose this setup to the internet**! It's for home lab use only. There's no security configured, no tls
 activated. Default service ports and weak default passwords are used.
 
-The openfire image is a custom build with pre-configured settings for easier setup.
-
 It's possible to use another chat integration instead of xmpp/openfire, like discord, slack, telegram, whatsapp, etc.
 Just change the n8n workflow to use the desired chat node.
 
@@ -134,7 +130,7 @@ Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration ins
 
 ---
 
-# My personal home lab bare metal specs (potatoe computer with nvidia gpu):
+# My personal home lab bare metal specs (10+ yo computer with nvidia gpu):
 
 - Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
 - 16 GB RAM DDR3 (Using about 3.2GB)
@@ -143,7 +139,3 @@ Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration ins
 - Pcie 2.0 x16
 - Ubuntu Server 24.04 LTS
 - k3s v1.33.6+k3s1 (b5847677)
-
-Don't have hardware? You can try aws, but it will not work in case of mad max scenario.
-
-There are [instructions to setup this lab inside aws](_setup/aws/README.md) g4dn instance.

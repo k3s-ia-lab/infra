@@ -34,10 +34,9 @@ spec:
             - name: NVIDIA_DRIVER_CAPABILITIES
               value: all
           volumeMounts:
-            - name: ollama-storage
+            - name: ollama-data
               mountPath: /root/.ollama
       volumes:
-        - name: ollama-storage
-          hostPath:
-            path: /mnt/data/ollama
-            type: DirectoryOrCreate
+        - name: ollama-data
+          persistentVolumeClaim:
+            claimName: ollama-data
