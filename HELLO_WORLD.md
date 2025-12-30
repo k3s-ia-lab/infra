@@ -25,7 +25,7 @@ Openfire -> User : Delivery response
 
 When it's running, is possible to "talk" with Ollama using jabber/xmpp client using n8n workflows.
 
-You can use any XMPP client (such as Pidgin, Gajim Dino) to connect to the Openfire server.
+You can use any XMPP client (such as Pidgin, Gajim Dino, Profanity) to connect to the Openfire server.
 Web-xmpp included inside openfire, no need to install xmpp client to test.
 
 A n8n workflow acts as a bridge, receiving messages from the user and sending them to the LLM running on Ollama, then
@@ -41,7 +41,7 @@ Don't need to rely on third-party services and their rules and rate limits.
 
 Also, after installing, your setup is 100% off-grid, no internet required.
 
-But... I like the irc idea... maybe in the future.
+But... I like the irc idea... maybe in the future. For now, using profanity xmpp client in terminal is fun enough.
 
 ---
 
