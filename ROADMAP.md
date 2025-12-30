@@ -21,3 +21,4 @@ ROADMAP:
 - https://localai.io/
 - https://jan.ai/
 - https://runcode.io/ cheap host
+- nip.io for dynamic dns

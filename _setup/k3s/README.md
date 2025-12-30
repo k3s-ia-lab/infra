@@ -21,7 +21,7 @@ services deployed in the K3s cluster. And deploy a squid proxy running on &lt;yo
 
 ---
 
-# Options without the embeddded ssh tunnel strategy
+# Options without the embeddded proxy strategy
 
 ## Option 1: You have control over your home network dns server
 

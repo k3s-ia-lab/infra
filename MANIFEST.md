@@ -1,4 +1,4 @@
-Greeting to humans (who still havean active employment contract) (humans also called as "variable cost units").
+Greeting to humans (who still have an active employment contract) (humans also called as "variable cost units").
 
 I came from a future where the "terminator" doesn't use a plasma rifle, but rather a department restructuring email sent
 at 3 AM on a Sunday. I was sent by John Connor, the CEO of Resistance Inc. A startup of the future figthing against the
@@ -9,7 +9,7 @@ The sky is not dominated by combat drones, but by spreadsheet macros that decide
 breakfast. Forget about defeating the system, the goal here is much more radical: keep employed.
 
 If you think the war is against chrome robots, you are mistaken. The war is against the algorithms that make you
-obsolete while their C-level executives (just puppets repeating whate the language model whisper in their ears) sign
+obsolete while their C-level executives (just puppets repeating what the language model whisper in their ears) sign
 your resignation letter.
 
 Are you proud to be prompt engineers on LinkedIn? In the future, this is like memorizing the menu of a restaurant where
