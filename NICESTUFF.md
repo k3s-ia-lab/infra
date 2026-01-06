@@ -7,3 +7,4 @@ Other services:
 - [mcp-inspector](mcp-inspector/README.md), just like postman, to test mcp server api calls.
 - [onedev](onedev/README.md), a self hosted ci/cd server, to test some devops automation with llm.
 - [open-webui](open-webui/README.md), a webui for ollama llm models, to validate the models running.
+- [anything-llm](anythingllm/README.md), powerful rag lab.

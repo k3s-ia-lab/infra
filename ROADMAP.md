@@ -19,7 +19,6 @@ ROADMAP:
 - playright mcp server (allow LLM to execute the playright test runner)
 - https://www.talos.dev/ inside proxmox
 - nip.io for dynamic dns
-- anythingLLM
 - whisper whisperx
 - stable diffusion webui
 - privateGPT
