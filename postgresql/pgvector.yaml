@@ -17,6 +17,7 @@ data:
     CREATE DATABASE openwebui;
     CREATE DATABASE openwebuipgvector;
     CREATE DATABASE keycloak;
+    CREATE DATABASE anythingllm;
 ---
 apiVersion: apps/v1
 kind: StatefulSet

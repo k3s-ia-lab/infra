@@ -1,0 +1,128 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: anythingllm
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: anythingllm-env
+  namespace: anythingllm
+data:
+  .env: |
+    LLM_PROVIDER='ollama'
+    OLLAMA_BASE_PATH='http://ollama-service.uaiso.svc.cluster.local:11434 '
+    OLLAMA_MODEL_PREF='granite4:3b'
+    OLLAMA_PERFORMANCE_MODE='base'
+    OLLAMA_KEEP_ALIVE_TIMEOUT='300'
+    EMBEDDING_ENGINE='ollama'
+    EMBEDDING_BASE_PATH='http://ollama-service.uaiso.svc.cluster.local:11434'
+    EMBEDDING_MODEL_MAX_CHUNK_LENGTH='8192'
+    EMBEDDING_MODEL_PREF='embeddinggemma:latest'
+    OLLAMA_EMBEDDING_BATCH_SIZE='1'
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: anythingllm-storage
+  namespace: anythingllm
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anythingllm
+  namespace: anythingllm
+  labels:
+    app: anythingllm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anythingllm
+  template:
+    metadata:
+      labels:
+        app: anythingllm
+    spec:
+      containers:
+        - name: anythingllm-container
+          image: mintplexlabs/anythingllm:pg
+          ports:
+            - containerPort: 3001
+              name: http
+              protocol: TCP
+          env:
+            - name: STORAGE_DIR
+              value: "/app/server/storage"
+            - name: DATABASE_URL
+              value: "postgresql://postgres:mysecurepassword@postgresql.postgresql.svc.cluster.local:5432/anythingllm"
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /app/server/storage
+            - name: env-volume
+              mountPath: /app/server/.env
+              subPath: .env
+          securityContext:
+            capabilities:
+              add: ["SYS_ADMIN"]
+      initContainers:
+        - name: fix-env-perms
+          image: busybox:1.37.0-uclibc
+          command: ["sh", "-c", "cp /configmap/.env /env/.env && chmod 666 /env/.env"]
+          volumeMounts:
+            - name: env-volume
+              mountPath: /env
+            - name: configmap-env
+              mountPath: /configmap
+      volumes:
+        - name: storage-volume
+          persistentVolumeClaim:
+            claimName: anythingllm-storage
+        - name: env-volume
+          emptyDir: {}
+        - name: configmap-env
+          configMap:
+            name: anythingllm-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: anythingllm-service
+  namespace: anythingllm
+  labels:
+    app: anythingllm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3001
+      targetPort: 3001
+      protocol: TCP
+  selector:
+    app: anythingllm
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: anythingllm
+  namespace: anythingllm
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: anythingllm.uaiso.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: anythingllm-service
+                port:
+                  number: 3001
