@@ -55,6 +55,18 @@ significant performance improvements over general-purpose CPU cores.
 In a noob friendly way: your LLM or diffusion model can fit your CPU + RAM, but it will be slow. If it fits in GPU +
 VRAM, it will be much faster.
 
+#### Unified memory architecture (UMA)
+
+There are some systems with unified memory architecture (UMA), where the CPU and GPU share the same memory pool. This
+can be beneficial for certain workloads, as it allows for faster data transfer between the CPU and GPU. However, 
+UMA systems may have limitations in terms of total available memory and bandwidth compared to dedicated GPU memory.
+
+Apple's M1/M2/M3/M4 chips are a good example of UMA systems, where the CPU and GPU share the same memory pool.
+This can lead to improved performance for certain AI workloads, as data can be accessed more quickly by both the CPU 
+and GPU.
+
+Minisforum with AMD Ryzen AI Max+ 395 is another example of UMA system.
+
 #### Ai hardware
 
 There are specialized AI accelerators like Google's TPU, Coral Edge TPU, Rapberry AI HAT (Hailo AI chip), and other 
