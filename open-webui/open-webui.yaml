@@ -22,14 +22,14 @@ spec:
     spec:
       containers:
         - name: open-webui-container
-          image: ghcr.io/open-webui/open-webui:v0.6.41
+          image: ghcr.io/open-webui/open-webui:v0.7.2
           ports:
             - containerPort: 8080
               name: http
               protocol: TCP
           env:
             - name: OLLAMA_BASE_URL
-              value: "http://ollama-service.uaiso.svc.cluster.local:11434"
+              value: "http://ollama-service.ollama.svc.cluster.local:11434"
             - name: WEBUI_URL
               value: "http://open-webui.uaiso.lan/"
             - name: OPENID_PROVIDER_URL
