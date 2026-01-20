@@ -137,6 +137,7 @@ Get a vm or baremetal machine with Ubuntu 24.04 LTS installed, and run:
 ```bash
 git clone https://github.com/uaiso-serious/infra.git
 ./infra/_setup/k3s/k3s.sh
+./infra/_setup/basic.sh
 ```
 
 That will install k3s and deploy hello-world manifest.

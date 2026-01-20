@@ -16,4 +16,3 @@ kubectl apply -f ./infra/_setup/k3s/coredns-custom.yaml
 kubectl -n kube-system scale deployment/coredns --replicas 1
 kubectl -n kube-system rollout status deployment/coredns
 
-./infra/_setup/basic.sh
