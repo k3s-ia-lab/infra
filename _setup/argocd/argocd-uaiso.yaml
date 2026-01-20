@@ -204,3 +204,20 @@ spec:
     targetRevision: HEAD
 status: {}
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: squid
+spec:
+  destination:
+    namespace: squid
+    server: https://kubernetes.default.svc
+  project: uaiso
+  syncPolicy:
+    automated:
+      enabled: true
+  source:
+    path: apps/squid
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
