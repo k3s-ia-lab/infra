@@ -230,7 +230,7 @@ spec:
   project: uaiso
   source:
     repoURL: https://github.com/coder/code-server
-    targetRevision: v4.3.0
+    targetRevision: v4.108.0
     path: ci/helm-chart
     helm:
       valuesObject:
