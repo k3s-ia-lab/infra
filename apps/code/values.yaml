@@ -1,0 +1,7 @@
+ingress:
+  enabled: true
+  hosts:
+    - host: code.uaiso.lan
+      paths:
+        - /
+  ingressClassName: "traefik"
