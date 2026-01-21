@@ -227,19 +227,16 @@ metadata:
   name: code
 spec:
   project: uaiso
-  source:
-    repoURL: https://github.com/coder/code-server
-    targetRevision: v4.108.0
-    path: ci/helm-chart
-    helm:
-      valuesObject:
-        ingress:
-          enabled: true
-          hosts:
-            - host: code.uaiso.lan
-              paths:
-                - /
-          ingressClassName: "traefik"
+  sources:
+    - repoURL: 'https://github.com/coder/code-server.git'
+      targetRevision: v4.108.0
+      path: ci/helm-chart
+      helm:
+        valueFiles:
+          - $values/apps/code/values.yaml
+    - repoURL: 'http://admin:admin@onedev.uaiso.lan/uaiso.git'
+      targetRevision: main
+      ref: values
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
