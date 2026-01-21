@@ -139,18 +139,17 @@ metadata:
   name: kubeshark
 spec:
   project: uaiso
-  source:
-    chart: kubeshark
-    repoURL: https://helm.kubehq.com
-    targetRevision: 52.11.7
-    helm:
-      releaseName: kubeshark
-      valuesObject:
-        tap:
-          ingress:
-            enabled: true
-            className: "traefik"
-            host: ks.uaiso.lan
+  sources:
+    - repoURL: "https://helm.kubehq.com"
+      chart: kubeshark
+      targetRevision: 52.11.7
+      helm:
+        releaseName: kubeshark
+        valueFiles:
+          - $values/apps/kubeshark/values.yaml
+    - repoURL: 'http://admin:admin@onedev.uaiso.lan/uaiso.git'
+      targetRevision: main
+      ref: values
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
