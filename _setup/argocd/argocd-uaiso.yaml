@@ -140,11 +140,10 @@ metadata:
 spec:
   project: uaiso
   sources:
-    - repoURL: "https://helm.kubehq.com"
-      chart: kubeshark
-      targetRevision: 52.11.7
+    - repoURL: 'https://github.com/kubeshark/kubeshark.git'
+      targetRevision: v52.11.7
+      path: helm-chart
       helm:
-        releaseName: kubeshark
         valueFiles:
           - $values/apps/kubeshark/values.yaml
     - repoURL: 'http://admin:admin@onedev.uaiso.lan/uaiso.git'
