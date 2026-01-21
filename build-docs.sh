@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir -p ./docs/apps
 
-yq -i -y '(.nav[] | select(has("Apps")) | .Apps) = []' mkdocs.yml
+yq -i '(.nav[] | select(has("Apps")).Apps) = []' mkdocs.yml
 
 find ./apps -mindepth 1 -maxdepth 1 -type d | sort | while read appdir; do
   if [ -d "$appdir" ]; then
@@ -12,7 +12,7 @@ find ./apps -mindepth 1 -maxdepth 1 -type d | sort | while read appdir; do
       cp "$SRC" "$DEST"
       echo "apps/${APPNAME}.md"
       APP_TMP=("apps/${APPNAME}.md")
-      yq -i -y '(.nav[] | select(has("Apps")) | .Apps) += ["'"$APP_TMP"'"]' mkdocs.yml
+      yq -i '(.nav[] | select(has("Apps")) | .Apps) += ["'"$APP_TMP"'"]' mkdocs.yml
     fi
   fi
 done
