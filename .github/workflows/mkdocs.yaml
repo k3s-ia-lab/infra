@@ -24,7 +24,10 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: pip install mkdocs-material
+        run: |
+          ./build-docs.sh
+          pip install mkdocs-material
+          pip install mkdocs_puml
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force

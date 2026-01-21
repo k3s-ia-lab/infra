@@ -1,11 +1,9 @@
-create keycloak
+# Keycloak
 
-```bash
-kubectl apply -f keycloak.yaml
-```
+Why keycloak? Not AI related, but some AI tools can be protected with SSO using keycloak.
 
-keycloak (needs create keycloak pgsql db, initial setup):
+[https://github.com/keycloak/keycloak](https://github.com/keycloak/keycloak)
 
-- url: http://auth.uaiso.lan/
+- http ingress: [http://auth.uaiso.lan/](http://auth.uaiso.lan/)
 - user: admin
 - password: admin

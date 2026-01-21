@@ -1,0 +1,10 @@
+# ArgoCD
+
+Why argocd? Not AI related, useful for deploying and managing applications on Kubernetes, including the AI apps.
+
+[ArgoCD example](../../examples/argocd)
+
+```bash
+kubectl create namespace argocd
+kubectl -n argocd apply -f https://raw.githubusercontent.com/argoproj/argo-cd/refs/tags/v3.2.5/manifests/install.yaml
+```

@@ -3,3 +3,4 @@ temp.yaml
 .debug
 apps/postgresql/backup
 .venv
+docs/apps

@@ -1,8 +1,8 @@
 # Welcome to UaiSo Serious/Infra
 
-GitHub repo [uaiso-serious/infra](https://github.com/uaiso-serious/infra).
+## Why so serious?
 
-## UaiSo - Serious? (Why so serious?)
+UaiSo - Serious?
 
 Unchained Artificial Intelligence Stack/Sandbox Ops/Open -- Why so serious about AI?
 
@@ -12,7 +12,41 @@ Lot's of AI tools for experimentation.
 
 Local first, privacy first, off-grid first (good to practice compliance stuff).
 
-There's a simple hello world example.
+## Knowledge barrier
+
+AI is a complex field, and getting started can be overwhelming. This project aims to lower the knowledge barrier by
+providing a simple and easy-to-deploy kubernetes setup with pre-configured AI tools. The goal is to make it easy for 
+anyone to get started with AI, regardless of their technical background.
+
+Another projects like [https://jan.ai](https://jan.ai) or LLM studio are doing a great job on lowering the barrier for
+AI experimentation, but they are desktop applications, and not focused on self-hosting.
+
+To better understand of this project, some skills are recommended, but not mandatory:
+
+- Kubernetes
+- Linux
+- Git / Gitops
+- Virtualization
+- Networking (including DNS)
+- Hardware
+
+## Budget barrier
+
+Today, the budget barrier for AI experimentation is high. Training large models requires significant computational
+resources, which can be expensive. Inference can also be costly, but less expensive than training.
+
+There's a relation between your knowledge and your budget. The more you know, the less you will spend. For example,
+more understanding about kubernetes, linux, hardware, virtualization, networking, will help you to optimize your setup,
+use old hardware, choose what tools to deploy to kubernetes, and avoid unecessary cpu, gpu, ram or storage usage.
+
+### Kubernetes knowledge
+
+If you don't know about kubernetes, there's a script to install k3s with a single command providing argocd + onedev git
+repo + squid proxy, but it will eat near 3GB of RAM. It's awesome, user-friendly, but not optimized for low budget 
+setups.
+
+If you are a kubernetes pro, you can deploy only what you need with kubectl and helm, and don't need argocd or any 
+gitops tool, saving cpu and ram.
 
 ## Know your gear
 
@@ -129,161 +163,3 @@ Linux users can use VirtualBox or KVM/QEMU.
 If you don't want to use virtualization, you can install k3s directly on your host operating system. I'm not sure if
 gpu passthrough will work with windows host inside wsl, or running Docker desktop or Rancher desktop, but on linux
 it should work fine.
-
-## TL;DR Let me try it!
-
-Get a vm or baremetal machine with Ubuntu 24.04 LTS installed, and run:
-
-```bash
-git clone https://github.com/uaiso-serious/infra.git
-./infra/_setup/k3s/k3s.sh
-./infra/_setup/basic.sh
-```
-
-That will install k3s and deploy hello-world manifest.
-
-Takes about 10 minutes to download container images and LLM models depending on your internet speed. You can use k9s
-command to check the pod status.
-
-Configure your browser to use a http proxy to access the ingress routes, point it to &lt;your-k3s-ipv4&gt; port 3128.
-
-Easy proxy stuff with [FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
-or [FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
-
-Open [http://xmpp.uaiso.lan](http://xmpp.uaiso.lan) login as admin/admin
-
-Say hi to severino bot.
-
-## Tools
-
-### anythingllm
-
-Why anythingllm? It's a nice webui LLM RAG lab.
-
-[https://github.com/Mintplex-Labs/anything-llm](https://github.com/Mintplex-Labs/anything-llm)
-
-- http ingress: [http://anythingllm.uaiso.lan](http://anythingllm.uaiso.lan)
-
----
-
-### grafana
-
-Why grafana? Not AI related, but good-looking for monitoring the hardware burning when using AI.
-
-[https://github.com/grafana/grafana](https://github.com/grafana/grafana)
-
-- http ingress: [http://grafana.uaiso.lan](http://grafana.uaiso.lan)
-- user: admin
-- password: admin
-
----
-
-### keycloak
-
-Why keycloak? Not AI related, but some AI tools can be protected with SSO using keycloak.
-
-[https://github.com/keycloak/keycloak](https://github.com/keycloak/keycloak)
-
-- http ingress: http://auth.uaiso.lan/
-- user: admin
-- password: admin
-
----
-
-### kubeshark
-
-Why kubeshark? Not AI related, but you can see how the LLM is talking to the outside world using MCP.
-
-[https://github.com/kubeshark/kubeshark](https://github.com/kubeshark/kubeshark)
-
-- http ingress: [http://ks.uaiso.lan](http://ks.uaiso.lan)
-
----
-
-### mcp-inspector
-
-Why mcp-inspector? It's a nice tool to inspect the Model Context Protocol (MCP) like using postman for REST APIs.
-
-[https://github.com/modelcontextprotocol/inspector](https://github.com/modelcontextprotocol/inspector)
-
-- http ingress: [http://mcp-inspector.uaiso.lan](http://mcp-inspector.uaiso.lan)
-
----
-
-### n8n
-
-Why n8n? Easy to create AI workflows and agents.
-
-[https://github.com/n8n-io/n8n](https://github.com/n8n-io/n8n)
-
-- http ingress: [http://n8n.uaiso.lan](http://n8n.uaiso.lan)
-
----
-
-### ollama
-
-Why ollama? Easy to use Local LLMs.
-
-[https://github.com/ollama/ollama](https://github.com/ollama/ollama)
-
-- http ingress: [http://ollama.uaiso.lan](http://ollama.uaiso.lan)
-
----
-
-### onedev
-
-Why onedev? A nice self-hosted git server with CI/CD with MCP server.
-
-[https://github.com/theonedev/onedev](https://github.com/theonedev/onedev)
-
-- http ingress: [http://onedev.uaiso.lan](http://onedev.uaiso.lan)
-
----
-
-### open-webui
-
-Why open-webui? A nice webui for local LLMs with ollama.
-
-[https://github.com/open-webui/open-webui](https://github.com/open-webui/open-webui)
-
-- http ingress: [http://open-webui.uaiso.lan](http://open-webui.uaiso.lan)
-
----
-
-### openfire
-
-Why openfire? Not AI related. A chat server that you can use to chat with LLM bots.
-
-[https://github.com/igniterealtime/Openfire](https://github.com/igniterealtime/Openfire)
-
-- http ingress: [http://xmpp.uaiso.lan](http://xmpp.uaiso.lan)
-- http ingress admin: [http://xmpp-adm.uaiso.lan/](http://xmpp-adm.uaiso.lan/)
-- user: admin
-- password: admin
-
----
-
-### postgresql (with pgvector)
-
-Why postgresql? Many tools needs a database backend, and postgresql is a nice option with pgvector extension for vector
-search.
-
-[https://github.com/postgres/postgres](https://github.com/postgres/postgres)
-
----
-
-### rabbitmq
-
-Why rabbitmq? Not AI related, n8n xmpp plugin to integrate openfire with LLM chatbots requires rabbitmq.
-
-[https://github.com/rabbitmq](https://github.com/rabbitmq)
-
-http ingress: [http://rabbitmq.uaiso.lan](http://rabbitmq.uaiso.lan)
-
----
-
-### zabbix
-
-Why zabbix? Not AI related, gather hardware metrics like GPU usage, temperature, power consumption, used by grafana.
-
-http ingress: [http://zabbix.uaiso.lan](http://zabbix.uaiso.lan)

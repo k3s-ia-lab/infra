@@ -1,9 +1,7 @@
-create mcp-inspector
+# Mcp-inspector
 
-```bash
-kubectl apply -f mcp-inspector.yaml
-```
+Why mcp-inspector? It's a nice tool to inspect the Model Context Protocol (MCP) like using postman for REST APIs.
 
-mcp inspector:
+[https://github.com/modelcontextprotocol/inspector](https://github.com/modelcontextprotocol/inspector)
 
-- url http://mcp-inspector.uaiso.lan
+- http ingress: [http://mcp-inspector.uaiso.lan](http://mcp-inspector.uaiso.lan)

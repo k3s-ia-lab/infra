@@ -1,7 +1,7 @@
-anything llm
+# Anythingllm
 
-- http ingress: http://anythingllm.uaiso.lan
+Why anythingllm? It's a nice webui LLM RAG lab.
 
-```bash
-kubectl apply -f anythingllm.yaml
-```
+[https://github.com/Mintplex-Labs/anything-llm](https://github.com/Mintplex-Labs/anything-llm)
+
+- http ingress: [http://anythingllm.uaiso.lan](http://anythingllm.uaiso.lan)

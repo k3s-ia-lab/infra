@@ -1,14 +1,7 @@
-This setup needs:
+# Open-webui
 
-- [postgresql](../postgresql/README.md)
-- [keycloak](../keycloak/README.md)
+Why open-webui? A nice webui for local LLMs with ollama.
 
-create open-webui
+[https://github.com/open-webui/open-webui](https://github.com/open-webui/open-webui)
 
-```bash
-kubectl apply -f open-webui.yaml
-```
-
-open-webui (needs keycloak with uaiso realm, user added to realm, create openwebui pgsql db, needs first setup):
-
-- url http://open-webui.uaiso.lan/
+- http ingress: [http://open-webui.uaiso.lan](http://open-webui.uaiso.lan)

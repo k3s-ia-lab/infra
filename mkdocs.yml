@@ -1,5 +1,52 @@
 site_name: UaiSo Serious
+site_url: https://uaiso-serious.github.io/infra/
+repo_name: uaiso-serious/infra
+repo_url: https://github.com/uaiso-serious/infra
 nav:
   - Home: index.md
-  - About: about.md
-theme: readthedocs
+  - Examples:
+      - argocd: examples/argocd/index.md
+      - chatbot: examples/chatbot/index.md
+  - Apps:
+      - apps/anythingllm.md
+      - apps/argocd.md
+      - apps/code.md
+      - apps/grafana.md
+      - apps/keycloak.md
+      - apps/kubeshark.md
+      - apps/mcp-inspector.md
+      - apps/n8n.md
+      - apps/ollama-cpu.md
+      - apps/ollama-cuda.md
+      - apps/onedev.md
+      - apps/openfire.md
+      - apps/open-webui.md
+      - apps/postgresql.md
+      - apps/rabbitmq.md
+      - apps/squid.md
+      - apps/zabbix.md
+  - Manifest: manifest.md
+theme:
+  name: material
+  palette:
+    - media: '(prefers-color-scheme: dark)'
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - search.share
+markdown_extensions:
+  - md_in_html
+plugins:
+  - plantuml:
+      puml_url: https://www.plantuml.com/plantuml/
