@@ -4,8 +4,8 @@ repo_name: uaiso-serious/infra
 repo_url: https://github.com/uaiso-serious/infra
 nav:
   - Home: index.md
-  - DNS: dns.md
   - Quickstart: quickstart.md
+  - DNS: dns.md
   - Examples:
       - argocd: examples/argocd/index.md
       - chatbot: examples/chatbot/index.md
