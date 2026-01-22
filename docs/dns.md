@@ -81,11 +81,15 @@ Option 7: Use [nip.io](https://nip.io/) for dynamic dns resolution
 
 Edit every yaml with your dns before deploy.
 
+---
+
 ## public dns
 
 Option 8: Use some dns service like [duckdns.org](https://www.duckdns.org/) or no-ip for dynamic dns resolution.
 
 Edit every yaml with your dns before deploy.
+
+---
 
 ## Other workarounds
 
