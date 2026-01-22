@@ -10,5 +10,9 @@ Why onedev? A nice self-hosted git server with CI/CD with MCP server.
 kubectl exec -n postgresql postgres-0 -- bash -c "echo 'create database onedev;' | psql -U postgres"
 helm repo add onedev https://code.onedev.io/onedev/~helm
 helm repo update onedev
-helm install onedev onedev/onedev -n onedev --create-namespace --values values.yaml
+helm install onedev onedev/onedev -n onedev --create-namespace --values values.yaml --version 14.0.8
+```
+
+```bash
+helm search repo onedev --versions
 ```
