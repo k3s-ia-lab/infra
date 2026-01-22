@@ -8,6 +8,7 @@ on:
       - 'mkdocs.yml'
       - '.github/workflows/mkdocs.yaml'
       - 'build-docs.sh'
+      - 'apps/*/README.md'
 
 permissions:
   contents: write
