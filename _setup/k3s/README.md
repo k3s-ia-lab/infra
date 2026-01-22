@@ -1,5 +1,5 @@
+# Install NVIDIA GPU Operator on k3s
 
-# Install NVIDIA GPU Operator on k3s (if you don't have a NVIDIA GPU, read the [ollama doc](../../ollama/README.md))
 https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/25.3.3/getting-started.html
 
 ```bash

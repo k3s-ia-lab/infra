@@ -6,7 +6,7 @@ the traefik ingress is configured to route *.uaiso.lan domains to the services d
 
 ## Squid
 
-Option 1: Use Squid Proxy
+Option 1: Use Squid Proxy (easy way)
 
 [squid](apps/squid.md)
 
@@ -74,6 +74,18 @@ Option 6: SOCKS5 Proxy deployment with SSH Dynamic Port Forwarding
 [ssh-socks5](apps/ssh-socks5.md)
 
 ---
+
+## nip.io
+
+Option 7: Use [nip.io](https://nip.io/) for dynamic dns resolution
+
+Edit every yaml with your dns before deploy.
+
+## public dns
+
+Option 8: Use some dns service like [duckdns.org](https://www.duckdns.org/) or no-ip for dynamic dns resolution.
+
+Edit every yaml with your dns before deploy.
 
 ## Other workarounds
 
