@@ -1,12 +1,11 @@
 
 ROADMAP:
 
+- evolution api
+- chatwoot
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
-- upgrade n8n to 2.x.
 - supabase
 - flowise
-- chatwoot
-- evolution api
 - dify
 - typebot
 - vllm
@@ -24,5 +23,4 @@ ROADMAP:
 - privateGPT
 - librechat
 - comfyUI
-- https://owncloud.com/
 - https://github.com/workadventure/workadventure

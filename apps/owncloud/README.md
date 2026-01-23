@@ -2,7 +2,9 @@
 
 Why Owncloud? Not AI related, useful file hosting for RAG pipelines.
 
-https://owncloud.uaiso.lan
+https://github.com/owncloud/ocis
+
+ingress: https://owncloud.uaiso.lan
 
 admin / admin
 
