@@ -39,6 +39,7 @@ applications:
   - name: onedev
   - name: open-webui
   - name: openfire
+  - name: owncloud
   - name: postgresql
   - name: rabbitmq
   - name: squid

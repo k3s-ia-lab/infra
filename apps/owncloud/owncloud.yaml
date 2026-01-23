@@ -1,0 +1,127 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: owncloud
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: owncloud-config
+  namespace: owncloud
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: owncloud-data
+  namespace: owncloud
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: owncloud-env
+  namespace: owncloud
+data:
+  OCIS_INSECURE: "true"
+  OCIS_URL: "https://owncloud.uaiso.lan"
+  PROXY_TLS: "false"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: owncloud
+  namespace: owncloud
+  labels:
+    app: owncloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: owncloud
+  template:
+    metadata:
+      labels:
+        app: owncloud
+    spec:
+      initContainers:
+        - name: ocis-init
+          image: owncloud/ocis:7.3.1
+          env:
+            - name: IDM_ADMIN_PASSWORD
+              value: admin
+          command: ["/bin/sh", "-c", "ocis init --insecure yes || true"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/ocis
+            - name: data-volume
+              mountPath: /var/lib/ocis
+      containers:
+        - name: owncloud
+          image: owncloud/ocis:7.3.1
+          ports:
+            - containerPort: 9200
+              name: http
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: owncloud-env
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/ocis
+            - name: data-volume
+              mountPath: /var/lib/ocis
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: owncloud-config
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: owncloud-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: owncloud-service
+  namespace: owncloud
+  labels:
+    app: owncloud
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9200
+      targetPort: 9200
+      protocol: TCP
+  selector:
+    app: owncloud
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: owncloud
+  namespace: owncloud
+spec:
+  tls:
+    - hosts:
+        - owncloud.uaiso.lan
+  rules:
+    - host: owncloud.uaiso.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: owncloud-service
+                port:
+                  number: 9200
