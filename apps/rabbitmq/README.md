@@ -12,3 +12,7 @@ http ingress: [http://rabbitmq.uaiso.lan](http://rabbitmq.uaiso.lan)
 - user: user
 - password: password
 - vhost: /
+
+```bash
+kubectl apply -f rabbitmq.yaml
+```

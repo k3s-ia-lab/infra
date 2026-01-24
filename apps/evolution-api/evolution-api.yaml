@@ -21,8 +21,22 @@ spec:
     spec:
       containers:
         - name: evolution-api
-          image: atendai/evolution-api:v1.8.7
+          image: evoapicloud/evolution-api:v2.3.7
           env:
+            - name: RABBITMQ_ENABLED
+              value: 'false'
+            - name: RABBITMQ_URI
+              value: 'amqp://rabbitmq-lb.rabbitmq.svc.cluster.local:5672'
+            - name: RABBITMQ_EXCHANGE_NAME
+              value: evolution
+            - name: CACHE_REDIS_ENABLED
+              value: 'true'
+            - name: CACHE_REDIS_URI
+              value: 'redis://redis-service.redis.svc.cluster.local:6379/6'
+            - name: DATABASE_PROVIDER
+              value: postgresql
+            - name: DATABASE_CONNECTION_URI
+              value: 'postgresql://postgres:mysecurepassword@postgresql.postgresql.svc.cluster.local:5432/evolution_api?schema=evolution_api'
             - name: AUTHENTICATION_API_KEY
               value: "changeme"
           ports:
