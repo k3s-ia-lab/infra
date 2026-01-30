@@ -8,7 +8,7 @@ ingress:
           pathType: Prefix
           backend:
             service:
-              name: chatwoot
+              name: uaiso-chatwoot
               port:
                 number: 3000
 services:

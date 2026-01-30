@@ -7,6 +7,17 @@ config:
       targetRevision: main
 applications:
   - name: anythingllm
+  - name: chatwoot
+    sources:
+      - repoURL: 'https://github.com/chatwoot/charts.git'
+        targetRevision: chatwoot-2.0.9
+        path: charts/chatwoot
+        helm:
+          valueFiles:
+            - $values/apps/chatwoot/argocd/values.yaml
+      - repoURL: 'https://github.com/uaiso-serious/infra.git'
+        targetRevision: main
+        ref: values
   - name: code
     sources:
       - repoURL: 'https://github.com/coder/code-server.git'
