@@ -9,6 +9,7 @@ nav:
   - Examples:
       - argocd: examples/argocd/index.md
       - chatbot: examples/chatbot/index.md
+      - letsencrypt: examples/letsencrypt/index.md
   - Apps:
       - apps/anythingllm.md
       - apps/argocd.md

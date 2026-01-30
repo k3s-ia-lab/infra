@@ -89,6 +89,8 @@ Option 8: Use some dns service like [duckdns.org](https://www.duckdns.org/) or n
 
 Edit every yaml with your dns before deploy.
 
+[duckdns.md](duckdns.md)
+
 ---
 
 ## Other workarounds
